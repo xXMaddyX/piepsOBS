@@ -5,7 +5,7 @@ export default class OBSinfo {
         /**@type {OBSWebSocket} */
         this.obs = obs;
     };
-
+    /**Get Version Informations About OBS Version thet is installed on System */
     async getVersion() {
         let obsVersion = await this.obs.call("GetVersion");
         console.log(`Current OBS Version: ${obsVersion.obsVersion}`);

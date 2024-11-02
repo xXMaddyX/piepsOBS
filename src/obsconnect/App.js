@@ -25,6 +25,7 @@ export default class App {
         this.obsInfo = null;
     };
 
+    /**Init Piep´s OBS Application */
     async initApp() {
         let adress = config.testConfig.adress;
         let pass = config.testConfig.password;
