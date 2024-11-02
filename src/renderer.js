@@ -1,8 +1,13 @@
 import './index.css';
-import './UXSystem/menuBar/menubar.js';
-import './loadTemplates.js'
+import MainApp from './UXSystem/APP/App.js';
 
-const app = document.querySelector('#app');
-const menuBar = document.createElement("menu-bar");
+//Define Custom Elements
+customElements.define("main-app", MainApp);
 
-app.append(menuBar);
+//Add Elements after DOM Content Loaded
+window.addEventListener("DOMContentLoaded", () => {
+    const app = document.querySelector('#app');
+    const mainApp = document.createElement("main-app");
+    
+    app.append(mainApp)
+});

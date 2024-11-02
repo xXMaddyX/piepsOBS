@@ -1,7 +1,7 @@
 import OBSConnector from "./obsConnect.js";
 import OBSinfo from "./obsInfo.js";
 import RumbleConnect from "../rumbleConnect/rumbleConnect.js";
-import localStore from "../localStorage/connectionData.js";
+import {localStore} from "../localStorage/connectionData.js";
 
 const config = {
     obsConfig: {
@@ -26,7 +26,7 @@ export default class App {
     };
 
     /**Init Piep´s OBS Application */
-    async initApp() {
+    initApp = async () => {
         let adress = config.testConfig.adress;
         let pass = config.testConfig.password;
 
@@ -37,7 +37,7 @@ export default class App {
         this.rubleConnection = new RumbleConnect();
     };
 
-    setConfig() {
+    setConfig = () => {
         config.obsConfig.adress = localStore.obsConfig.adress;
         config.obsConfig.password = localStore.obsConfig.password;
         config.rumbleConfig.url = localStore.rumbleConfig.url;

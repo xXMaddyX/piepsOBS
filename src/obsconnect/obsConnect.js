@@ -7,12 +7,12 @@ export default class OBSConnector {
         this.password = password;
     };
 
-    async init() {
+    init = async () => {
         this.obs = new OBSWebSocket();
         await this.connectOBS();
     };
 
-    async connectOBS() {
+    connectOBS = async () => {
         try {
             await this.obs.connect(this.adress, this.password);
             console.log(`Connected to OBS at: Adress: ${this.adress}`);

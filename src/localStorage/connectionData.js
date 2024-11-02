@@ -9,4 +9,12 @@ const localStore = {
     },
 };
 
-export default localStore;
+const rumbleAPIData = {
+    rubleAPIData: null,
+    numOfFollowers: ""
+}
+
+export {
+    localStore,
+    rumbleAPIData
+}

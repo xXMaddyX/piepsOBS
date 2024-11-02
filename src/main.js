@@ -1,6 +1,7 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain} = require('electron');
 const path = require('node:path');
 import App from './obsconnect/App.js';
+import IpcInit from './ipcHandler.js';
 
 //Inizilise Classes
 const obsApp = new App();
@@ -18,6 +19,7 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
+      contextIsolation: false,
     },
     autoHideMenuBar: false,
     
@@ -39,9 +41,11 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(async () => {
   createWindow();
+  //This needs to be loadet after user has entered informations
   await obsApp.initApp();
   await obsApp.obsInfo.getVersion();
   await obsApp.rubleConnection.fetchAPIonStart();
+  //obsApp.rubleConnection.update();
   
 
   // On OS X it's common to re-create a window in the app when the
@@ -64,3 +68,4 @@ app.on('window-all-closed', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+IpcInit();
