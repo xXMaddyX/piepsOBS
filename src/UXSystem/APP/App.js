@@ -1,5 +1,6 @@
 import '/src/UXSystem/MenuBar/menuBar.js';
 import '/src/UXSystem/OBSConnectionInput/OBSConnectionInput.js';
+const { ipcRenderer } = require("electron");
 
 export default class MainApp extends HTMLElement {
     constructor() {
@@ -28,6 +29,7 @@ export default class MainApp extends HTMLElement {
     selectors() {
         this.appBox = this.shadow.querySelector('.app-box');
         this.menuBarSelector = this.shadow.querySelector('.app-menu-bar');
+        this.connectObsBtn = this.shadow.querySelector('#connect-to-obs');
     }
     
     createAndAppendElements() {
@@ -43,8 +45,11 @@ export default class MainApp extends HTMLElement {
         this.addEventListener("open-obs-input-window", () => {
             this.obsConWindow.classList.add('open');
         });
-        this.addEventListener("obs-cancel-btn-event", () => {
+        this.addEventListener("obs-close-window-event", () => {
             this.obsConWindow.classList.remove('open');
+        });
+        this.connectObsBtn.addEventListener('click', () => {
+            ipcRenderer.invoke("connect-to-obs");
         });
     }
 };

@@ -25,5 +25,5 @@ export default class RumbleConnect {
 
     update = () => {
         setInterval(this.fetchAPIonStart, 1000)
-    }
+    };
 };

@@ -1,3 +1,5 @@
+const { ipcRenderer } = require("electron");
+
 class OBSConnectionInput extends HTMLElement {
     constructor() {
         super();
@@ -24,30 +26,34 @@ class OBSConnectionInput extends HTMLElement {
     selectors() {
         this.obsOkBtn = this.shadow.querySelector('#obs-ok-btn');
         this.obsCancelBtn = this.shadow.querySelector('#obs-cancel-btn');
+        this.obsAdressInp = this.shadow.querySelector("#obs-adress");
+        this.obsPasswordInp = this.shadow.querySelector("#obs-password");
+
+        this.obsAdressInp.value = "ws://localhost:4455";
     };
 
     listeners() {
-        this.obsOkBtn.addEventListener('click', () => {
-            console.log("Send Data to LocalStorage")
+        this.obsOkBtn.addEventListener('click',async () => {
+            let dataObj = {
+                adress: this.obsAdressInp.value,
+                password: this.obsPasswordInp.value,
+            };
+            ipcRenderer.invoke("set-obs-data", dataObj);
+            this.dispatchEvent(this.obsCloseWindowEvent);
         });
 
         this.obsCancelBtn.addEventListener('click', () => {
             console.log("Event triggert")
-            this.dispatchEvent(this.obsCancelBtnEvent);
+            this.dispatchEvent(this.obsCloseWindowEvent);
         });
     };
 
     customEvents() {
-        this.obsOkBtnEvent = new CustomEvent("obs-ok-btn-event", {
+        this.obsCloseWindowEvent = new CustomEvent("obs-close-window-event", {
             bubbles: true,
             composed: true
         });
-
-        this.obsCancelBtnEvent = new CustomEvent("obs-cancel-btn-event", {
-            bubbles: true,
-            composed: true
-        });
-    }
+    };
 };
 
 

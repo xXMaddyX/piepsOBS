@@ -4,14 +4,6 @@ import RumbleConnect from "../rumbleConnect/rumbleConnect.js";
 import {localStore} from "../localStorage/connectionData.js";
 
 const config = {
-    obsConfig: {
-        adress: "",
-        password: "",
-    },
-    rumbleConfig: {
-        url: "",
-        apiKey: "",
-    },
     testConfig: {
         adress: 'ws://localhost:4455',
         password: 'C3kqcIQ6A0agUdWo'
@@ -26,16 +18,18 @@ export default class App {
     };
 
     /**Init Piep´s OBS Application */
-    initApp = async () => {
-        let adress = config.testConfig.adress;
-        let pass = config.testConfig.password;
+    initObsConnect = async () => {
+        let adress = localStore.obsConfig.adress;
+        let pass = localStore.obsConfig.password;
 
         this.obsConnection = new OBSConnector(adress, pass);
         await this.obsConnection.init();
-
         this.obsInfo = new OBSinfo(this.obsConnection.obs);
-        this.rubleConnection = new RumbleConnect();
     };
+    
+    initRumbleConnect() {
+        this.rubleConnection = new RumbleConnect();
+    }
 
     setConfig = () => {
         config.obsConfig.adress = localStore.obsConfig.adress;

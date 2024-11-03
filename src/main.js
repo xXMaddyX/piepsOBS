@@ -1,10 +1,10 @@
 const { app, BrowserWindow, ipcMain} = require('electron');
 const path = require('node:path');
-import App from './obsconnect/App.js';
+//import App from './obsconnect/App.js';
 import IpcInit from './ipcHandler.js';
 
 //Inizilise Classes
-const obsApp = new App();
+//const obsApp = new App();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -41,10 +41,11 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(async () => {
   createWindow();
+
   //This needs to be loadet after user has entered informations
-  await obsApp.initApp();
-  await obsApp.obsInfo.getVersion();
-  await obsApp.rubleConnection.fetchAPIonStart();
+  //await obsApp.initApp();
+  //await obsApp.obsInfo.getVersion();
+  //await obsApp.rubleConnection.fetchAPIonStart();
   //obsApp.rubleConnection.update();
   
 

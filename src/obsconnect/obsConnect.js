@@ -21,6 +21,5 @@ export default class OBSConnector {
             console.error("Failes to connect:", err);
             return;
         };
-        return;
     };
 };
