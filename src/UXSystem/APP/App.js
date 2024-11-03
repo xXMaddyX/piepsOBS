@@ -1,5 +1,6 @@
 import '/src/UXSystem/MenuBar/menuBar.js';
 import '/src/UXSystem/OBSConnectionInput/OBSConnectionInput.js';
+import { AppHTML } from './AppHTML.js';
 const { ipcRenderer } = require("electron");
 
 export default class MainApp extends HTMLElement {
@@ -15,8 +16,11 @@ export default class MainApp extends HTMLElement {
     
     async init() {
         try {
+            //Disable for Production
             const htmlRes = await fetch('/src/UXSystem/APP/App.html');
             this.shadow.innerHTML = await htmlRes.text();
+
+            //this.shadow.innerHTML = AppHTML;
         } catch (err) {
             console.error(err);
             return;

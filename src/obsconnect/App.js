@@ -27,14 +27,10 @@ export default class App {
         this.obsInfo = new OBSinfo(this.obsConnection.obs);
     };
     
-    initRumbleConnect() {
-        this.rubleConnection = new RumbleConnect();
-    }
-
-    setConfig = () => {
-        config.obsConfig.adress = localStore.obsConfig.adress;
-        config.obsConfig.password = localStore.obsConfig.password;
-        config.rumbleConfig.url = localStore.rumbleConfig.url;
-        config.rumbleConfig.apiKey = localStore.rumbleConfig.apiKey;
+    initRumbleConnect = async () => {
+        let url = localStore.rumbleConfig.url
+        this.rubleConnection = new RumbleConnect(url);
+        await this.rubleConnection.fetchAPIonStart();
+        this.rubleConnection.update();
     };
 };

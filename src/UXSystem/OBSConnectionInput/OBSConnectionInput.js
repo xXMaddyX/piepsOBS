@@ -1,4 +1,5 @@
 const { ipcRenderer } = require("electron");
+import { htmlOBSConnect } from "./OBSConHTMLProd.js";
 
 class OBSConnectionInput extends HTMLElement {
     constructor() {
@@ -11,8 +12,11 @@ class OBSConnectionInput extends HTMLElement {
     }
     async init() {
         try {
+            //Disable for Production
             const htmlRes = await fetch("/src/UXSystem/OBSConnectionInput/OBSConnectionInput.html");
             this.shadow.innerHTML = await htmlRes.text();
+
+            //this.shadow.innerHTML = htmlOBSConnect;
         } catch (err) {
             console.error(err);
             return;

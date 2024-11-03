@@ -7,9 +7,9 @@ import IpcInit from './ipcHandler.js';
 //const obsApp = new App();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
-  app.quit();
-}
+//if (require('electron-squirrel-startup')) {
+  //app.quit();
+//}
 
 const createWindow = () => {
   // Create the browser window.

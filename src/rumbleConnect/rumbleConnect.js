@@ -1,22 +1,31 @@
 import { localStore, rumbleAPIData } from "../localStorage/connectionData.js";
 
 export default class RumbleConnect {
-    constructor() {
+    constructor(url) {
+        this.url = url;
         this.rumbleApiDataOnLoad = null;
         this.currentrumbleApiData = null;
     };
     fetchAPIonStart = async () => {
         try {
-            let url = localStore.rumbleConfig.url;
-            let apiKey = localStore.rumbleConfig.apiKey;
-            let raw = await fetch(`${url}${apiKey}`);
+            let raw = await fetch(this.url);
             this.rumbleApiDataOnLoad = await raw.json();
             this.saveToLocalStorage()
-            
+            console.log(this.rumbleApiDataOnLoad)
         } catch (err) {
             console.error(err)
         }
     };
+
+    fetchAPIonRun = async () => {
+        try {
+            let raw = await fetch(this.url);
+            this.currentrumbleApiData = await raw.json();
+            console.log(`Is Running ${this.currentrumbleApiData.username}`)
+        } catch (err) {
+            console.error(err)
+        }
+    }
 
     saveToLocalStorage = () => {
         rumbleAPIData.numOfFollowers = this.rumbleApiDataOnLoad.followers.num_followers;
@@ -24,6 +33,6 @@ export default class RumbleConnect {
     };
 
     update = () => {
-        setInterval(this.fetchAPIonStart, 1000)
+        setInterval(this.fetchAPIonRun, 1000)
     };
 };

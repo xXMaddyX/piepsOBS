@@ -20,6 +20,7 @@ const IpcInit = () => {
     ipcMain.handle("connect-to-obs", async () => {
       await connection.initObsConnect();
       await connection.obsInfo.getVersion();
+      await connection.initRumbleConnect();
     });
 
     ipcMain.handle("connect-to-rumble", () => {

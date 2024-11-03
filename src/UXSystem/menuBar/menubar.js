@@ -1,4 +1,5 @@
 const { ipcRenderer } = require("electron");
+import { menuBarHTML } from "./menuBarHTML.js";
 
 export default class MenuBar extends HTMLElement {
     constructor() {
@@ -14,8 +15,11 @@ export default class MenuBar extends HTMLElement {
     
     async init() {
         try {
+            //Disable for Production
             const htmlRes = await fetch("/src/UXSystem/MenuBar/menuBar.html");
             this.shadow.innerHTML = await htmlRes.text();
+
+            //this.shadow.innerHTML = menuBarHTML;
         } catch (err) {
             console.log(err)
             return;
