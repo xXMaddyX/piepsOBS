@@ -21,6 +21,7 @@ export default class MenuBar extends HTMLElement {
             return;
         };
         this.selectors();
+        this.customEvents();
         return;
     };
     
@@ -28,6 +29,8 @@ export default class MenuBar extends HTMLElement {
         this.dropdown = this.shadow.querySelector('.button-dropdown');
         this.menuBtn = this.shadow.querySelector('#menu-button');
         this.exitButton = this.shadow.querySelector('#exit-btn');
+        this.obsConBtn = this.shadow.querySelector('#obs-connect-btn');
+        this.rumbleConBtn = this.shadow.querySelector('#rumble-connect-btn');
         this.logic();
     };
 
@@ -54,10 +57,28 @@ export default class MenuBar extends HTMLElement {
         this.exitButton.addEventListener('click', () => {
             ipcRenderer.invoke("exitProgramm");
         });
+        this.obsConBtn.addEventListener('click', () => {
+            this.dispatchEvent(this.clickObsConEvent);
+        });
+        this.rumbleConBtn.addEventListener('click', () => {
+            this.dispatchEvent(this.clickRumbleConEvent);
+        });
         //this.button.addEventListener('click', async () => {
             //let data = await ipcRenderer.invoke("getObsVersion");
             //this.h1Element.textContent = await data;
         //});
+    };
+
+    customEvents() {
+        this.clickObsConEvent = new CustomEvent("open-obs-input-window", {
+            bubbles: true,
+            composed: true
+        });
+
+        this.clickRumbleConEvent = new CustomEvent("open-rumble-input-window", {
+            bubbles: true,
+            composed: true
+        });
     };
 };
 
