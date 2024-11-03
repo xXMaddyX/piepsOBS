@@ -14,7 +14,7 @@ export default class RumbleConnect {
             this.saveToLocalStorage()
             
         } catch (err) {
-            console.warn(err)
+            console.error(err)
         }
     };
 

@@ -10,6 +10,7 @@ export default class OBSConnector {
     init = async () => {
         this.obs = new OBSWebSocket();
         await this.connectOBS();
+        return;
     };
 
     connectOBS = async () => {
@@ -18,6 +19,8 @@ export default class OBSConnector {
             console.log(`Connected to OBS at: Adress: ${this.adress}`);
         } catch (err) {
             console.error("Failes to connect:", err);
+            return;
         };
+        return;
     };
 };

@@ -7,8 +7,14 @@ export default class OBSinfo {
     };
     /**Get Version Informations About OBS Version thet is installed on System */
     getVersion = async () => {
-        let obsVersion = await this.obs.call("GetVersion");
-        console.log(`Current OBS Version: ${obsVersion.obsVersion}`);
-        console.log(`Current RPC Version: ${obsVersion.rpcVersion}`);
+        try {
+            let obsVersion = await this.obs.call("GetVersion");
+            console.log(`Current OBS Version: ${obsVersion.obsVersion}`);
+            console.log(`Current RPC Version: ${obsVersion.rpcVersion}`);
+        } catch (err) {
+            console.error("Cant get Version", err);
+            return;
+        }
+        return;
     };
 };
