@@ -1,5 +1,6 @@
 import '/src/UXSystem/MenuBar/menuBar.js';
 import '/src/UXSystem/OBSConnectionInput/OBSConnectionInput.js';
+import '/src/UXSystem/APP/RumbleConnectionInput/RumbleConnectionInput.js';
 import { AppHTML } from './AppHTML.js';
 const { ipcRenderer } = require("electron");
 
@@ -40,11 +41,18 @@ export default class MainApp extends HTMLElement {
     
     createAndAppendElements() {
         this.menuBar = document.createElement("menu-bar");
+
+        //OBS_Connection_Component
         this.obsConWindow = document.createElement("obs-connection-input");
         this.obsConWindow.classList.add("obs-connection-input-window");
-        
+
+        //RUMBLE_CONNECTION_COMPONENT
+        this.rumbleConWindow = document.createElement("rumble-connect-input");
+        this.rumbleConWindow.classList.add("rumble-connect-input-window");
+
+        //APPEND_ELEMENTS_TO_MAIN_APP_COMPONENT
         this.menuBarSelector.append(this.menuBar);
-        this.appBox.append(this.obsConWindow);
+        this.appBox.append(this.obsConWindow, this.rumbleConWindow);
     };
 
     listeners() {
@@ -57,9 +65,9 @@ export default class MainApp extends HTMLElement {
         this.connectObsBtn.addEventListener('click', () => {
             ipcRenderer.invoke("connect-to-obs");
         });
-        //Test Item Remove Later
+        //Test Item Remove
         this.testAlert.addEventListener('click', () => {
             ipcRenderer.invoke("test-Alert");
-        })
-    }
+        });
+    };
 };

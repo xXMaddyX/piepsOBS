@@ -39,5 +39,33 @@
             transition-property: opacity, visibility;
             transition-duration: 0.5s, 0s;
         }
+
+
+        .rumble-connect-input-window {
+            visibility: visible;
+            opacity: 1;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            background-color: orange;
+            box-shadow: 2px 2px 5px black;
+            border-radius: 10px;
+            padding: 10px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid black;
+            transition-property: opacity;
+            transition-duration: 0.5s;
+        }
+        .rumble-connect-input-window.open {
+            visibility: visible;
+            opacity: 1;
+        }
+        .rumble-connect-input-window:not(.open) {
+            transition-delay: 0s, 0.5s;
+            transition-property: opacity, visibility;
+            transition-duration: 0.5s, 0s;
+        }
     </style>
 </div>

@@ -14,6 +14,6 @@ export default class OBSinfo {
         } catch (err) {
             console.error("Cant get Version", err);
             return;
-        }
+        };
     };
 };

@@ -9,5 +9,5 @@ window.addEventListener("DOMContentLoaded", () => {
     const app = document.querySelector('#app');
     const mainApp = document.createElement("main-app");
     
-    app.append(mainApp)
+    app.append(mainApp);
 });

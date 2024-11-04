@@ -10,7 +10,7 @@ const SceneStates = {
 
 const IpcInit = () => {
     ipcMain.handle("getObsVersion", () => {
-        return rumbleAPIData.numOfFollowers
+        return rumbleAPIData.numOfFollowers;
       });
 
     ipcMain.handle("exitProgramm", () => {
@@ -35,8 +35,8 @@ const IpcInit = () => {
 
     //Test Handler Remove later
     ipcMain.handle("test-Alert", async () => {
-      console.log("Called")
-      SceneStates.allertState = !SceneStates.allertState
+      console.log("Called");
+      SceneStates.allertState = !SceneStates.allertState;
       const { sceneItemId } = await connection.obsConnection.obs.call("GetSceneItemId", {
         sceneName: "TestScene",
         sourceName: "FollowerAlert"

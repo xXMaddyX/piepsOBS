@@ -3,6 +3,7 @@ import OBSWebSocket from "obs-websocket-js";
 export default class OBSConnector {
     constructor(adress, password) {
         this.obs = null;
+        this.obsElementData;
         this.adress = adress;
         this.password = password;
     };

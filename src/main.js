@@ -30,7 +30,7 @@ const createWindow = () => {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   } else {
     mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
-  }
+  };
 
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
@@ -54,7 +54,7 @@ app.whenReady().then(async () => {
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
-    }
+    };
   });
 });
 
@@ -64,7 +64,7 @@ app.whenReady().then(async () => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
-  }
+  };
 });
 
 // In this file you can include the rest of your app's specific main process
