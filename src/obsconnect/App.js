@@ -1,4 +1,4 @@
-import OBSConnector from "./obsConnect.js";
+import OBSConnector from "./obsCOnnect.js";
 import OBSinfo from "./obsInfo.js";
 import RumbleConnect from "../rumbleConnect/rumbleConnect.js";
 import {localStore} from "../localStorage/connectionData.js";

@@ -34,6 +34,8 @@ export default class MainApp extends HTMLElement {
         this.appBox = this.shadow.querySelector('.app-box');
         this.menuBarSelector = this.shadow.querySelector('.app-menu-bar');
         this.connectObsBtn = this.shadow.querySelector('#connect-to-obs');
+        //Test Item Remove it later
+        this.testAlert = this.shadow.querySelector('#test-Alert');
     }
     
     createAndAppendElements() {
@@ -55,5 +57,9 @@ export default class MainApp extends HTMLElement {
         this.connectObsBtn.addEventListener('click', () => {
             ipcRenderer.invoke("connect-to-obs");
         });
+        //Test Item Remove Later
+        this.testAlert.addEventListener('click', () => {
+            ipcRenderer.invoke("test-Alert");
+        })
     }
 };
