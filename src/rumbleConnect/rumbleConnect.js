@@ -33,6 +33,10 @@ export default class RumbleConnect {
     };
 
     update = () => {
-        setInterval(this.fetchAPIonRun, 1000);
+        if (localStore.rumbleConfig.url === null) {
+            return;
+        } else {
+            setInterval(this.fetchAPIonRun, 1000);
+        };
     };
 };

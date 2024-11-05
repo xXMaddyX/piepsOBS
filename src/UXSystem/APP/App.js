@@ -56,12 +56,22 @@ export default class MainApp extends HTMLElement {
     };
 
     listeners() {
+        //OBS_INPUT_WINDOW
         this.addEventListener("open-obs-input-window", () => {
             this.obsConWindow.classList.add('open');
         });
         this.addEventListener("obs-close-window-event", () => {
             this.obsConWindow.classList.remove('open');
         });
+
+        //RUMBLE_INPUT_WINDOW
+        this.addEventListener("open-rumble-input-window", () => {
+            this.rumbleConWindow.classList.add('open');
+        });
+        this.addEventListener("close-rumble-window", () => {
+            this.rumbleConWindow.classList.remove('open');
+        });
+
         this.connectObsBtn.addEventListener('click', () => {
             ipcRenderer.invoke("connect-to-obs");
         });

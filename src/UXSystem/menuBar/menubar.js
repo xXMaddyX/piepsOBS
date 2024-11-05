@@ -25,17 +25,18 @@ export default class MenuBar extends HTMLElement {
             return;
         };
         this.selectors();
+        this.logic();
         this.customEvents();
         return;
     };
     
     selectors() {
+        this.saveSettings = this.shadow.querySelector('#save-conf-btn');
         this.dropdown = this.shadow.querySelector('.button-dropdown');
         this.menuBtn = this.shadow.querySelector('#menu-button');
         this.exitButton = this.shadow.querySelector('#exit-btn');
         this.obsConBtn = this.shadow.querySelector('#obs-connect-btn');
         this.rumbleConBtn = this.shadow.querySelector('#rumble-connect-btn');
-        this.logic();
     };
 
     toggleDropdown() {
@@ -67,10 +68,7 @@ export default class MenuBar extends HTMLElement {
         this.rumbleConBtn.addEventListener('click', () => {
             this.dispatchEvent(this.clickRumbleConEvent);
         });
-        //this.button.addEventListener('click', async () => {
-            //let data = await ipcRenderer.invoke("getObsVersion");
-            //this.h1Element.textContent = await data;
-        //});
+        
     };
 
     customEvents() {

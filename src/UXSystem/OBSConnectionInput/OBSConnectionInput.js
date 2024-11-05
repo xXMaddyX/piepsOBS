@@ -42,12 +42,28 @@ class OBSConnectionInput extends HTMLElement {
                 adress: this.obsAdressInp.value,
                 password: this.obsPasswordInp.value,
             };
-            ipcRenderer.invoke("set-obs-data", dataObj);
-            this.dispatchEvent(this.obsCloseWindowEvent);
+            if (dataObj.password === "") {
+                this.obsPasswordInp.value = "Enter a Valid Password";
+                this.obsPasswordInp.style.color = "red";
+            } else {
+                ipcRenderer.invoke("set-obs-data", dataObj);
+                this.obsPasswordInp.value = "";
+                this.obsPasswordInp.style.color = "black";
+                this.dispatchEvent(this.obsCloseWindowEvent);
+            };
+        });
+
+        this.obsPasswordInp.addEventListener('click', () => {
+            if (this.obsPasswordInp.style.color === "red") {
+                this.obsPasswordInp.style.color = "black";
+                this.obsPasswordInp.value = "";
+            } else {
+                return;
+            };
         });
 
         this.obsCancelBtn.addEventListener('click', () => {
-            console.log("Event triggert")
+            this.obsPasswordInp.value = "";
             this.dispatchEvent(this.obsCloseWindowEvent);
         });
     };

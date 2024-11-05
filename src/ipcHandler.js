@@ -1,4 +1,5 @@
 const { ipcMain, app } = require('electron');
+import fs from 'fs/promises';
 import { rumbleAPIData, localStore } from './localStorage/connectionData';
 import App from './obsconnect/App.js';
 
@@ -9,14 +10,20 @@ const SceneStates = {
 }
 
 const IpcInit = () => {
-    ipcMain.handle("getObsVersion", () => {
-        return rumbleAPIData.numOfFollowers;
-      });
-
+    //EXIT_PROGRAMM_HANDLER
     ipcMain.handle("exitProgramm", () => {
       app.exit();
     });
 
+    //SAVE_SETTINGS_TO_LOCAL_FILE
+    ipcMain.handle("save-data-to-file", () => {
+
+    });
+
+    ipcMain.handle("getObsVersion", () => {
+      return rumbleAPIData.numOfFollowers;
+    });
+  
     ipcMain.handle("set-obs-data", (e, data) => {
       localStore.obsConfig.adress = data.adress;
       localStore.obsConfig.password = data.password;

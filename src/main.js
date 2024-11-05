@@ -1,15 +1,22 @@
 const { app, BrowserWindow, ipcMain} = require('electron');
 const path = require('node:path');
+import fs from 'fs/promises';
 //import App from './obsconnect/App.js';
 import IpcInit from './ipcHandler.js';
 
-//Inizilise Classes
-//const obsApp = new App();
+// TO DO; SAVE DATA TO LOCAL FILE
+const loadDataAtStartup = async () => {
+  try {
+    const savePath = path.join(app.getPath('userData'), 'piepsobscon.json');
+    const data = await fs.readFile(savePath, 'utf-8');
+    const loadetData = JSON.parse(data);
+    console.log(loadetData);
+  } catch (err) {
+    console.error(new Error("No Settings Saved"));
+  };
+};
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-//if (require('electron-squirrel-startup')) {
-  //app.quit();
-//}
+loadDataAtStartup();
 
 const createWindow = () => {
   // Create the browser window.
