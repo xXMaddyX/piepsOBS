@@ -62,11 +62,19 @@ export default class MenuBar extends HTMLElement {
         this.exitButton.addEventListener('click', () => {
             ipcRenderer.invoke("exitProgramm");
         });
+
+        //CONNECTION BUTTONS RUMBLE AND OBS
         this.obsConBtn.addEventListener('click', () => {
             this.dispatchEvent(this.clickObsConEvent);
         });
         this.rumbleConBtn.addEventListener('click', () => {
             this.dispatchEvent(this.clickRumbleConEvent);
+        });
+
+        //SAVE_SETTINGS_BUTTONS
+        this.saveSettings.addEventListener('click', () => {
+            ipcRenderer.invoke("save-settings-event");
+            console.log("clicked")
         });
         
     };

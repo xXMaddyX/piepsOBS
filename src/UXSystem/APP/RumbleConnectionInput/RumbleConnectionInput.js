@@ -1,5 +1,4 @@
 const { ipcRenderer } = require("electron");
-import { localStore } from "../../../localStorage/connectionData";
 
 class RumbleConnectInput extends HTMLElement {
     constructor() {
@@ -29,8 +28,10 @@ class RumbleConnectInput extends HTMLElement {
 
     listeners() {
         this.okButton.addEventListener('click', () => {
-            if (this.input.value != "") {
-                localStore.rumbleConfig.url = this.input.value;
+            if (this.input.value !== "") {
+                const inputData = this.input.value;
+                ipcRenderer.invoke("set-rumble-data", inputData);
+                
                 this.input.value = "";
                 this.dispatchEvent(this.closeRumbleInp);
             } else {

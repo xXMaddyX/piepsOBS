@@ -28,8 +28,7 @@ export default class App {
     };
     
     initRumbleConnect = async () => {
-        //IS SET TO DEFAULT FOR DEVELOPMENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        let url = localStore.rumbleConfig.defaultUrl;
+        let url = localStore.rumbleConfig.url;
         this.rubleConnection = new RumbleConnect(url);
         await this.rubleConnection.fetchAPIonStart();
         this.rubleConnection.update();

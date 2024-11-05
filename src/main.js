@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain} = require('electron');
+import { localStore } from './localStorage/connectionData.js';
 const path = require('node:path');
 import fs from 'fs/promises';
 //import App from './obsconnect/App.js';
@@ -10,7 +11,8 @@ const loadDataAtStartup = async () => {
     const savePath = path.join(app.getPath('userData'), 'piepsobscon.json');
     const data = await fs.readFile(savePath, 'utf-8');
     const loadetData = JSON.parse(data);
-    console.log(loadetData);
+    localStore.obsConfig = loadetData.obsConfig;
+    localStore.rumbleConfig = loadetData.rumbleConfig;
   } catch (err) {
     console.error(new Error("No Settings Saved"));
   };

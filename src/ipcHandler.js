@@ -1,5 +1,6 @@
 const { ipcMain, app } = require('electron');
 import fs from 'fs/promises';
+import path from 'path';
 import { rumbleAPIData, localStore } from './localStorage/connectionData';
 import App from './obsconnect/App.js';
 
@@ -40,7 +41,34 @@ const IpcInit = () => {
     ipcMain.handle("connect-to-rumble", () => {
       connection.rubleConnection();
     });
+    ipcMain.handle("set-rumble-data", (e, data) => {
+      localStore.rumbleConfig.url = data;
+    });
     //-------------------------------------------------------------------------------------
+    //--------------------------->>>>SAVE_SETTINGS_HANDLER<<<<-----------------------------
+    ipcMain.handle("save-settings-event", async () => {
+      const dirPath = app.getPath('userData');
+      console.log(localStore.rumbleConfig.url)
+      const filePath = path.join(dirPath, 'piepsobscon.json');
+      const dataToSave = {
+        obsConfig: localStore.obsConfig,
+        rumbleConfig: localStore.rumbleConfig
+      };
+      if (localStore.obsConfig.password === "" && localStore.rumbleConfig.url === "") {
+        console.log("Data not set");
+        return;
+      } else {
+        const jsonData = JSON.stringify(dataToSave);
+        console.log("Data Saved");
+        try {
+          await fs.mkdir(dirPath, { recursive: true });
+          await fs.writeFile(filePath, jsonData);
+          return { success: true, message: "Settings saved successfully." };
+        } catch (error) {
+          return { success: false, message: "Error saving settings", error };
+        };
+      };
+    });
     //------------------------->>>>TEST_HANDLER_REMOVE_LATER<<<<---------------------------
     //Test Handler Remove later!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     ipcMain.handle("test-Alert", async () => {
