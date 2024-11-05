@@ -1,4 +1,4 @@
-const { ipcMain, app } = require('electron');
+const { ipcMain, app, BrowserWindow } = require('electron');
 import fs from 'fs/promises';
 import path from 'path';
 import { rumbleAPIData, localStore } from './localStorage/connectionData';
@@ -10,7 +10,9 @@ const SceneStates = {
   allertState: false,
 }
 
-const IpcInit = () => {
+/**@param {BrowserWindow} mainWindow*/
+const IpcInit = (mainWindow) => {
+    const windowRef = mainWindow;
     //----------------------------->>>>BASIC_HANDLERS<<<<----------------------------------
     //EXIT_PROGRAMM_HANDLER
     ipcMain.handle("exitProgramm", () => {
@@ -18,23 +20,25 @@ const IpcInit = () => {
     });
     //SAVE_SETTINGS_TO_LOCAL_FILE
     ipcMain.handle("save-data-to-file", () => {
-
+      
     });
     //-------------------------------------------------------------------------------------
     //------------------------------>>>>OBS_HANDLERS<<<<-----------------------------------
     ipcMain.handle("getObsVersion", () => {
       return rumbleAPIData.numOfFollowers;
     });
-  
+    
     ipcMain.handle("set-obs-data", (e, data) => {
       localStore.obsConfig.adress = data.adress;
       localStore.obsConfig.password = data.password;
     });
-
+    
     ipcMain.handle("connect-to-obs", async () => {
       await connection.initObsConnect();
       await connection.obsInfo.getVersion();
       await connection.initRumbleConnect();
+      //Send Data To Frontend after Load (TODO!!!!)
+      //windowRef.webContents.send();
     });
     //-------------------------------------------------------------------------------------
     //----------------------------->>>>RUMBLE_HANDLERS<<<<---------------------------------

@@ -43,13 +43,15 @@ const createWindow = () => {
 
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
+  return mainWindow;
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(async () => {
-  createWindow();
+  let mainWindow = createWindow();
+  IpcInit(mainWindow);
 
   //This needs to be loadet after user has entered informations
   //await obsApp.initApp();
@@ -78,4 +80,3 @@ app.on('window-all-closed', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-IpcInit();
