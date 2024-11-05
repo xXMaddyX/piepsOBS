@@ -9,7 +9,11 @@ class OBSConnectionInput extends HTMLElement {
 
     async connectedCallback() {
         await this.init();
-    }
+        this.selectors();
+        this.listeners();
+        this.customEvents();
+    };
+    
     async init() {
         try {
             //Disable for Production
@@ -21,9 +25,6 @@ class OBSConnectionInput extends HTMLElement {
             console.error(err);
             return;
         };
-        this.selectors();
-        this.listeners();
-        this.customEvents();
         return;
     };
 

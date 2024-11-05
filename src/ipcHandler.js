@@ -10,16 +10,17 @@ const SceneStates = {
 }
 
 const IpcInit = () => {
+    //----------------------------->>>>BASIC_HANDLERS<<<<----------------------------------
     //EXIT_PROGRAMM_HANDLER
     ipcMain.handle("exitProgramm", () => {
       app.exit();
     });
-
     //SAVE_SETTINGS_TO_LOCAL_FILE
     ipcMain.handle("save-data-to-file", () => {
 
     });
-
+    //-------------------------------------------------------------------------------------
+    //------------------------------>>>>OBS_HANDLERS<<<<-----------------------------------
     ipcMain.handle("getObsVersion", () => {
       return rumbleAPIData.numOfFollowers;
     });
@@ -34,13 +35,14 @@ const IpcInit = () => {
       await connection.obsInfo.getVersion();
       await connection.initRumbleConnect();
     });
-
+    //-------------------------------------------------------------------------------------
+    //----------------------------->>>>RUMBLE_HANDLERS<<<<---------------------------------
     ipcMain.handle("connect-to-rumble", () => {
       connection.rubleConnection();
     });
-
-
-    //Test Handler Remove later
+    //-------------------------------------------------------------------------------------
+    //------------------------->>>>TEST_HANDLER_REMOVE_LATER<<<<---------------------------
+    //Test Handler Remove later!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     ipcMain.handle("test-Alert", async () => {
       console.log("Called");
       SceneStates.allertState = !SceneStates.allertState;
