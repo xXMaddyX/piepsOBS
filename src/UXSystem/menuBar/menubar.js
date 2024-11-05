@@ -54,7 +54,7 @@ export default class MenuBar extends HTMLElement {
         if (!path.includes(this) && !path.includes(this.menuBtn)) {
             this.dropdown.classList.remove("open");
             this.dropDownVisible = false;
-            }
+            };
         });
         this.menuBtn.addEventListener('click', (e) => {
             this.toggleDropdown();

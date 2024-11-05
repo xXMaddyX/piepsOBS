@@ -48,18 +48,15 @@ const IpcInit = () => {
     //--------------------------->>>>SAVE_SETTINGS_HANDLER<<<<-----------------------------
     ipcMain.handle("save-settings-event", async () => {
       const dirPath = app.getPath('userData');
-      console.log(localStore.rumbleConfig.url)
       const filePath = path.join(dirPath, 'piepsobscon.json');
       const dataToSave = {
         obsConfig: localStore.obsConfig,
         rumbleConfig: localStore.rumbleConfig
       };
       if (localStore.obsConfig.password === "" && localStore.rumbleConfig.url === "") {
-        console.log("Data not set");
         return;
       } else {
         const jsonData = JSON.stringify(dataToSave);
-        console.log("Data Saved");
         try {
           await fs.mkdir(dirPath, { recursive: true });
           await fs.writeFile(filePath, jsonData);
