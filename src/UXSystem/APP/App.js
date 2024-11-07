@@ -1,7 +1,9 @@
 import '/src/UXSystem/MenuBar/menuBar.js';
 import '/src/UXSystem/OBSConnectionInput/OBSConnectionInput.js';
 import '/src/UXSystem/APP/RumbleConnectionInput/RumbleConnectionInput.js';
+import '/src/UXSystem/APP/ObsSceneInfoBox/ObsSceneInfoBox.js';
 import { AppHTML } from './AppHTML.js';
+import { FrontendStoreGlobal } from '../frontendStore/frontendStore.js';
 const { ipcRenderer } = require("electron");
 
 export default class MainApp extends HTMLElement {
@@ -29,12 +31,14 @@ export default class MainApp extends HTMLElement {
         this.selectors();
         this.createAndAppendElements();
         this.listeners();
+        this.customEvents();
         return;
     };
     selectors() {
         this.appBox = this.shadow.querySelector('.app-box');
         this.menuBarSelector = this.shadow.querySelector('.app-menu-bar');
         this.connectObsBtn = this.shadow.querySelector('#connect-to-obs');
+        this.AppSceneInfoContent = this.shadow.querySelector('.app-main-scene-info');
         //Test Item Remove it later
         this.testAlert = this.shadow.querySelector('#test-Alert');
     }
@@ -53,6 +57,10 @@ export default class MainApp extends HTMLElement {
         //APPEND_ELEMENTS_TO_MAIN_APP_COMPONENT
         this.menuBarSelector.append(this.menuBar);
         this.appBox.append(this.obsConWindow, this.rumbleConWindow);
+
+        //APP_MAIN_CONTENT
+        this.obsSceneInfoBox = document.createElement('obs-scene-info-box');
+        this.AppSceneInfoContent.append(this.obsSceneInfoBox);
     };
 
     listeners() {
@@ -78,6 +86,17 @@ export default class MainApp extends HTMLElement {
         //Test Item Remove
         this.testAlert.addEventListener('click', () => {
             ipcRenderer.invoke("test-Alert");
+        });
+
+        ipcRenderer.on("obs-api-data", (e, data) => {
+            FrontendStoreGlobal.setObsDataStore(data);
+            this.obsSceneInfoBox.dispatchEvent(this.obsDataLoadetEvent);
+        });
+    };
+    customEvents() {
+        this.obsDataLoadetEvent = new CustomEvent("obs-scene-data-loadet", {
+            bubbles: true,
+            composed: true,
         });
     };
 };

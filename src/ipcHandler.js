@@ -1,8 +1,8 @@
 const { ipcMain, app, BrowserWindow } = require('electron');
 import fs from 'fs/promises';
 import path from 'path';
-import { rumbleAPIData, localStore } from './localStorage/connectionData';
 import App from './obsconnect/App.js';
+import { rumbleAPIData, localStore } from './localStorage/connectionData';
 
 const connection = new App();
 
@@ -13,6 +13,7 @@ const SceneStates = {
 /**@param {BrowserWindow} mainWindow*/
 const IpcInit = (mainWindow) => {
     const windowRef = mainWindow;
+    
     //----------------------------->>>>BASIC_HANDLERS<<<<----------------------------------
     //EXIT_PROGRAMM_HANDLER
     ipcMain.handle("exitProgramm", () => {
@@ -37,8 +38,14 @@ const IpcInit = (mainWindow) => {
       await connection.initObsConnect();
       await connection.obsInfo.getVersion();
       await connection.initRumbleConnect();
-      //Send Data To Frontend after Load (TODO!!!!)
-      //windowRef.webContents.send();
+
+      //SEND_OBS_SCENE_DATA_TO_FRONTEND------------------------>
+      try {
+        const connectionAPIData = await connection.obsConnection.getSceneData();
+        windowRef.webContents.send("obs-api-data", connectionAPIData);
+      } catch (err) {
+        console.log(new Error("Data Not get", err));
+      };
     });
     //-------------------------------------------------------------------------------------
     //----------------------------->>>>RUMBLE_HANDLERS<<<<---------------------------------
@@ -73,7 +80,6 @@ const IpcInit = (mainWindow) => {
     //------------------------->>>>TEST_HANDLER_REMOVE_LATER<<<<---------------------------
     //Test Handler Remove later!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     ipcMain.handle("test-Alert", async () => {
-      console.log("Called");
       SceneStates.allertState = !SceneStates.allertState;
       const { sceneItemId } = await connection.obsConnection.obs.call("GetSceneItemId", {
         sceneName: "TestScene",

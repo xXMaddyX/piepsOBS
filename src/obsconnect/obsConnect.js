@@ -3,9 +3,9 @@ import OBSWebSocket from "obs-websocket-js";
 export default class OBSConnector {
     constructor(adress, password) {
         this.obs = null;
-        this.obsElementData;
         this.adress = adress;
         this.password = password;
+        this.obsSceneData = [];
     };
 
     init = async () => {
@@ -22,5 +22,39 @@ export default class OBSConnector {
             console.error("Failes to connect:", err);
             return;
         };
+    };
+
+    /**
+     * @returns Object Array of {sceneName, sceneSourcesList<Array>[objects]}
+     */
+    getSceneData = async () => {
+        try {
+            const sceneNameList = await this.obs.call("GetSceneList");
+            for (let item of sceneNameList.scenes) {
+                this.obsSceneData.push({sceneName: item.sceneName, sceneSourcesList: []});
+            };
+        } catch (err) {
+            console.log("Data not Ready");
+        };
+        try {
+            for (let item of this.obsSceneData) {
+                const sceneSourceData = await this.obs.call("GetSceneItemList", {
+                    sceneName: item.sceneName
+                });
+                sceneSourceData.sceneItems.forEach(element => {
+                    item.sceneSourcesList.push({
+                        inputKind: element.inputKind,
+                        sceneItemEnabled: element.sceneItemEnabled,
+                        sceneItemId: element.sceneItemId,
+                        sceneItemIndex: element.sceneItemIndex,
+                        sourceName: element.sourceName,
+                        sourceUuid: element.sourceUuid
+                    });
+                });
+            };
+        } catch (err) {
+            console.error(new Error("Can't get Scene Item List"));
+        };
+        return this.obsSceneData;
     };
 };

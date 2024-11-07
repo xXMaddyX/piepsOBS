@@ -21,7 +21,7 @@ export default class RumbleConnect {
         try {
             let raw = await fetch(this.url);
             this.currentrumbleApiData = await raw.json();
-            console.log(`Is Running ${this.currentrumbleApiData.username}`);
+            console.log(`Is Running ${this.currentrumbleApiData.username}'s Stream!!!`);
         } catch (err) {
             console.error(err);
         };
@@ -29,7 +29,7 @@ export default class RumbleConnect {
 
     saveToLocalStorage = () => {
         rumbleAPIData.numOfFollowers = this.rumbleApiDataOnLoad.followers.num_followers;
-        console.log(this.rumbleApiDataOnLoad);
+        //console.log(this.rumbleApiDataOnLoad);
     };
 
     update = () => {

@@ -1,5 +1,6 @@
 import './index.css';
 import MainApp from './UXSystem/APP/App.js';
+import './UXSystem/frontendStore/frontendStore.js';
 
 //Define Custom Elements
 customElements.define("main-app", MainApp);
