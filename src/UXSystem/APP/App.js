@@ -38,7 +38,9 @@ export default class MainApp extends HTMLElement {
         this.appBox = this.shadow.querySelector('.app-box');
         this.menuBarSelector = this.shadow.querySelector('.app-menu-bar');
         this.connectObsBtn = this.shadow.querySelector('#connect-to-obs');
+
         this.AppSceneInfoContent = this.shadow.querySelector('.app-main-scene-info');
+        
         //Test Item Remove it later
         this.testAlert = this.shadow.querySelector('#test-Alert');
     }

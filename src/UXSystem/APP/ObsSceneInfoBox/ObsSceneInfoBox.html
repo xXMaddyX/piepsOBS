@@ -1,9 +1,111 @@
 <div class="obs-scene-info-box">
-    <div class="obs-scene-info-scene-names">
-        <!--Inject Scene Buttons-->
+    <div class="obs-scene-info-box-header">
+        <h3>Obs Scenes</h3>
+    </div>
+    <div class="obs-scene-info-scenes-container">
+        <div class="obs-scene-info-scenes-buttons">
+            <!--Inject Scene Buttons-->
+        </div>
+    </div>
+    <div class="obs-scene-info-box-header">
+        <h3>Obs Scene Sources</h3>
     </div>
     <div class="obs-scene-info-source-names">
-        <!--Inject Source Buttons-->
+        <div class="obs-scene-info-sources-container">
+            <!--Inject Source Buttons-->
+        </div>
     </div>
-    <h1>Das ist ein test</h1>
 </div>
+<style>
+    .obs-scene-info-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: orange;
+        min-width: 300px;
+        max-width: 300px;
+        min-height: calc(100vh - 60px);
+        max-height: 100vh;
+    }
+    .obs-scene-info-scenes-container {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        border-radius: 5px;
+        align-items: center;
+        padding: 10px;
+        background-color: rgb(170, 170, 170);
+        min-width: 250px;
+        max-width: 250px;
+        min-height: 200px;
+        max-height: 200px;
+    }
+
+    .obs-scene-info-scenes-buttons {
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .obs-scene-info-buttons {
+        width: 200px;
+        height: 25px;
+        border-radius: 5px;
+        flex-grow: unset;
+        background-color: gray;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+    }
+
+    .obs-scene-info-source-names {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        border-radius: 5px;
+        align-items: center;
+        padding: 10px;
+        background-color: rgb(170, 170, 170);
+        min-width: 250px;
+        max-width: 250px;
+        min-height: 200px;
+        max-height: 200px;
+    }
+
+    .obs-scene-info-sources-container {
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .obs-source-info-buttons {
+        width: 200px;
+        height: 25px;
+        border-radius: 5px;
+        flex-grow: unset;
+        background-color: gray;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+        height: 0px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+    background-color: #444444a8;
+    border-radius: 20px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+    background-color: #02020200;
+    }
+
+    ::-webkit-scrollbar-track {
+    background-color: #3a3a3a00;
+    }
+</style>

@@ -1,4 +1,5 @@
 const { ipcRenderer } = require("electron");
+import { FrontendStoreGlobal } from "../../frontendStore/frontendStore";
 
 class ObsSceneInfoBox extends HTMLElement {
     constructor() {
@@ -19,21 +20,36 @@ class ObsSceneInfoBox extends HTMLElement {
     };
 
     selectors() {
-        this.obsSceneNames = document.querySelector('.obs-scene-info-scene-names');
-        this.obsSceneObjects = document.querySelector('.obs-scene-info-source-names');
-    };
+        this.obsSceneNames = this.shadow.querySelector('.obs-scene-info-scene-names');
+        this.obsSceneObjects = this.shadow.querySelector('.obs-scene-info-source-names');
 
-    renderSceneNames() {
-
-    };
-
-    renderSceneSources() {
-
+        this.obsSceneInfoButtons = this.shadow.querySelector('.obs-scene-info-scenes-buttons');
+        this.obsSourceInfoButtons = this.shadow.querySelector('.obs-scene-info-sources-container');
     };
 
     listeners() {
         this.addEventListener('obs-scene-data-loadet', () => {
-            console.log("Event Triggered")
+            console.log(FrontendStoreGlobal.obsDataStore);
+            this.obsSourceInfoButtons.innerHTML = ""
+            FrontendStoreGlobal.obsDataStore.forEach(item => {
+                const obsSceneButton = document.createElement("button");
+                obsSceneButton.classList.add("obs-scene-info-buttons");
+                obsSceneButton.textContent = item.sceneName;
+
+                obsSceneButton.addEventListener('click', () => {
+                    this.obsSourceInfoButtons.innerHTML = "";
+                    const dataArr = item.sceneSourcesList;
+                    dataArr.forEach(elem => {
+                        const sourceButton = document.createElement("button");
+                        sourceButton.classList.add("obs-source-info-buttons");
+                        sourceButton.textContent = elem.sourceName;
+
+                        this.obsSourceInfoButtons.append(sourceButton);
+                    });
+                });
+
+                this.obsSceneInfoButtons.append(obsSceneButton);
+            });
         });
     };
 

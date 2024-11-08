@@ -34,7 +34,7 @@ export default class OBSConnector {
                 this.obsSceneData.push({sceneName: item.sceneName, sceneSourcesList: []});
             };
         } catch (err) {
-            console.log("Data not Ready");
+            console.log("Data not Ready", err);
         };
         try {
             for (let item of this.obsSceneData) {
@@ -53,7 +53,7 @@ export default class OBSConnector {
                 });
             };
         } catch (err) {
-            console.error(new Error("Can't get Scene Item List"));
+            console.error(new Error("Can't get Scene Item List", err));
         };
         return this.obsSceneData;
     };

@@ -6,6 +6,15 @@ export default class RumbleConnect {
         this.rumbleApiDataOnLoad = null;
         this.currentrumbleApiData = null;
     };
+    /**
+     * Takes Seconds for Delay * 1000ms
+     * @param {number} delay 
+     * @returns {number}
+     */
+    delayCall(delay) {
+        return delay * 1000;
+    };
+
     fetchAPIonStart = async () => {
         try {
             let raw = await fetch(this.url);
@@ -36,7 +45,7 @@ export default class RumbleConnect {
         if (localStore.rumbleConfig.url === null) {
             return;
         } else {
-            setInterval(this.fetchAPIonRun, 1000);
+            setInterval(this.fetchAPIonRun, this.delayCall(5));
         };
     };
 };
