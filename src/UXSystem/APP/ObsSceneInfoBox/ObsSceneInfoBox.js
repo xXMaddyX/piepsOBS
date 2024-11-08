@@ -31,6 +31,7 @@ class ObsSceneInfoBox extends HTMLElement {
         this.addEventListener('obs-scene-data-loadet', () => {
             console.log(FrontendStoreGlobal.obsDataStore);
             this.obsSourceInfoButtons.innerHTML = ""
+
             FrontendStoreGlobal.obsDataStore.forEach(item => {
                 const obsSceneButton = document.createElement("button");
                 obsSceneButton.classList.add("obs-scene-info-buttons");
@@ -39,11 +40,11 @@ class ObsSceneInfoBox extends HTMLElement {
                 obsSceneButton.addEventListener('click', () => {
                     this.obsSourceInfoButtons.innerHTML = "";
                     const dataArr = item.sceneSourcesList;
+
                     dataArr.forEach(elem => {
                         const sourceButton = document.createElement("button");
                         sourceButton.classList.add("obs-source-info-buttons");
                         sourceButton.textContent = elem.sourceName;
-
                         this.obsSourceInfoButtons.append(sourceButton);
                     });
                 });

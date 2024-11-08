@@ -81,13 +81,23 @@ const IpcInit = (mainWindow) => {
     //Test Handler Remove later!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     ipcMain.handle("test-Alert", async () => {
       SceneStates.allertState = !SceneStates.allertState;
-      const { sceneItemId } = await connection.obsConnection.obs.call("GetSceneItemId", {
+      let sceneItemId1 = await connection.obsConnection.obs.call("GetSceneItemId", {
         sceneName: "TestScene",
         sourceName: "FollowerAlert"
       });
       connection.obsConnection.obs.call("SetSceneItemEnabled", {
         sceneName: "TestScene",
-        sceneItemId: sceneItemId,
+        sceneItemId: sceneItemId1.sceneItemId,
+        sceneItemEnabled: SceneStates.allertState
+      });
+
+      let sceneItemId2  = await connection.obsConnection.obs.call("GetSceneItemId", {
+        sceneName: "TestScene",
+        sourceName: "video"
+      });
+      connection.obsConnection.obs.call("SetSceneItemEnabled", {
+        sceneName: "TestScene",
+        sceneItemId: sceneItemId2.sceneItemId,
         sceneItemEnabled: SceneStates.allertState
       });
     });

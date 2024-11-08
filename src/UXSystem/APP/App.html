@@ -5,11 +5,11 @@
             <div class="app-main-scene-info">
                 <!--Inject Scene Info Component-->
             </div>
-            <div class="app-set-alter-buttons">
-
+            <div class="app-main-set-alerts">
+                <!--Inject Scene Set Alert Component-->
             </div>
-            <div class="app-main-set-alter-window">
-                
+            <div class="app-main-set-chat">
+                <!--Inject Scene Set Chat Component-->
             </div>
             <div class="app-main-server-status">
                 <button id="connect-to-obs">Connect To Obs</button>
@@ -22,6 +22,11 @@
             min-width: 100vw;
             min-height: 100vh;
             background-color: rgb(131, 131, 131);
+        }
+
+        .app-main-content {
+            display: flex;
+            flex-direction: row;
         }
 
         .obs-connection-input-window {

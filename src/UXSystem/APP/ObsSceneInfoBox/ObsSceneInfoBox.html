@@ -20,11 +20,12 @@
     .obs-scene-info-box {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
         background-color: orange;
         min-width: 300px;
         max-width: 300px;
-        min-height: calc(100vh - 60px);
+        min-height: calc(100vh - 31px);
         max-height: 100vh;
     }
     .obs-scene-info-scenes-container {
@@ -59,6 +60,10 @@
         transition-duration: 0.5s;
     }
 
+    .obs-scene-info-buttons:hover {
+        background-color: rgb(160, 160, 160);
+    }
+
     .obs-scene-info-source-names {
         display: flex;
         flex-direction: column;
@@ -89,6 +94,10 @@
         background-color: gray;
         transition-property: background-color;
         transition-duration: 0.5s;
+    }
+
+    .obs-source-info-buttons:hover {
+        background-color: rgb(160, 160, 160);
     }
 
     ::-webkit-scrollbar {
