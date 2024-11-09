@@ -45,6 +45,10 @@ class ObsSceneInfoBox extends HTMLElement {
                         const sourceButton = document.createElement("button");
                         sourceButton.classList.add("obs-source-info-buttons");
                         sourceButton.textContent = elem.sourceName;
+                        sourceButton.addEventListener('click', () => {
+                            console.log(elem);
+                        });
+                        
                         this.obsSourceInfoButtons.append(sourceButton);
                     });
                 });
@@ -53,9 +57,16 @@ class ObsSceneInfoBox extends HTMLElement {
             });
         });
     };
-
-    customEvents() {
-
+    //NEED TO ADD THE EVENT TO SET IT TO AN CUSTOM ALERT!!!!!!!!!!!!!!!!!!!!!!!!
+    customEvents(dataOfButton, targetAlert) {
+        this.sendButtonToConfig =  new CustomEvent("send-button-to-config", {
+            detail: {
+                data: dataOfButton,
+                target: targetAlert
+            },
+            bubbles: true,
+            composed: true
+        });
     };
 };
 

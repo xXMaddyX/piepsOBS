@@ -2,6 +2,7 @@ import '/src/UXSystem/MenuBar/menuBar.js';
 import '/src/UXSystem/OBSConnectionInput/OBSConnectionInput.js';
 import '/src/UXSystem/APP/RumbleConnectionInput/RumbleConnectionInput.js';
 import '/src/UXSystem/APP/ObsSceneInfoBox/ObsSceneInfoBox.js';
+import '/src/UXSystem/APP/AlertBoxes/AlertBoxes.js';
 import { AppHTML } from './AppHTML.js';
 import { FrontendStoreGlobal } from '../frontendStore/frontendStore.js';
 const { ipcRenderer } = require("electron");
@@ -40,6 +41,7 @@ export default class MainApp extends HTMLElement {
         this.connectObsBtn = this.shadow.querySelector('#connect-to-obs');
 
         this.AppSceneInfoContent = this.shadow.querySelector('.app-main-scene-info');
+        this.AppAlertContent = this.shadow.querySelector('.app-main-set-alerts');
         
         //Test Item Remove it later
         this.testAlert = this.shadow.querySelector('#test-Alert');
@@ -63,6 +65,10 @@ export default class MainApp extends HTMLElement {
         //APP_MAIN_CONTENT
         this.obsSceneInfoBox = document.createElement('obs-scene-info-box');
         this.AppSceneInfoContent.append(this.obsSceneInfoBox);
+
+        //ALERT_COMPONENTS
+        this.alertContentBox = document.createElement('alert-boxes');
+        this.AppAlertContent.append(this.alertContentBox);
     };
 
     listeners() {
