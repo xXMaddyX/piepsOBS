@@ -6,11 +6,17 @@
                 <button id="follower-alert-activate-button">Set Active</button>
             </div>
             <div class="follower-boxes-sub-body">
-                
+                <!--Inject Follower Elements-->
             </div>
         </div>
         <div class="alert-boxes-rant">
-
+            <div class="rant-header">
+                <h3>Rant Alert</h3>
+                <button id="rant-alert-activate-button">Set Rent Active</button>
+            </div>
+            <div class="rant-boxes-sub-body">
+                <!--Inject Rant Elements-->
+            </div>
         </div>
         <div class="alert-boxes-subscribe">
             <div class="subscribe-header">
@@ -18,12 +24,13 @@
                 <button id="subscribe-activate-button">Set Active</button>
             </div>
             <div class="alert-boxes-sub-body">
-
+                <!--Inject Subscribe Elemts-->
             </div>
         </div>
     </div>
 </div>
 <style>
+    /*--------------------------------------MAIN_BOX-----------------------------------------*/
     .alert-boxes-box {
         display: flex;
         flex-direction: column;
@@ -33,5 +40,121 @@
         min-width: 300px;
         max-width: 300px;
         min-height: calc(100vh - 30px);
+        padding-left: 15px;
+        padding-right: 15px;
+        border-left: 1px solid black;
+    }
+
+    .alert-boxes-box h3 {
+        line-height: 1px;
+    }
+    
+    .alert-boxes-content {
+        display: flex;
+        flex-direction: column;
+        place-content: center;
+        place-items: center;
+    }
+    /*---------------------------------------------------------------------------------------*/
+    /*---------------------------------FOLLOWER_ALERT_BOX------------------------------------*/
+    .alert-boxes-follower {
+        display: flex;
+        flex-direction: column;
+        place-content: center;
+        place-items: center;
+    }
+
+    .follower-header {
+        place-items: center;
+        place-content: center;
+    }
+
+    #follower-alert-activate-button {
+        width: 200px;
+        height: 25px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        flex-grow: unset;
+        background-color: gray;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+    }
+
+    .follower-boxes-sub-body {
+        display: flex;
+        flex-direction: column;
+        min-height: 120px;
+        min-width: 300px;
+        border-radius: 5px;
+        border: 1px solid black;
+        background-color: rgb(170, 170, 170);
+    }
+    /*----------------------------------------------------------------------------------------*/
+    /*------------------------------------RANT_ALERT_BOX--------------------------------------*/
+    .alert-boxes-rant {
+        display: flex;
+        flex-direction: column;
+        place-content: center;
+        place-items: center;
+    }
+
+    .rant-header {
+        place-items: center;
+        place-content: center;
+    }
+
+    #rant-alert-activate-button {
+        width: 200px;
+        height: 25px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        flex-grow: unset;
+        background-color: gray;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+    }
+
+    .rant-boxes-sub-body {
+        display: flex;
+        flex-direction: column;
+        min-height: 120px;
+        min-width: 300px;
+        border-radius: 5px;
+        border: 1px solid black;
+        background-color: rgb(170, 170, 170);
+    }
+    /*----------------------------------------------------------------------------------------*/
+    /*----------------------------------SUBSCRIBE_ALERT_BOX-----------------------------------*/
+    .alert-boxes-subscribe {
+        display: flex;
+        flex-direction: column;
+        place-content: center;
+        place-items: center;
+    }
+
+    .subscribe-header {
+        place-items: center;
+        place-content: center;
+    }
+
+    #subscribe-activate-button {
+        width: 200px;
+        height: 25px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        flex-grow: unset;
+        background-color: gray;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+    }
+
+    .alert-boxes-sub-body {
+        display: flex;
+        flex-direction: column;
+        min-height: 120px;
+        min-width: 300px;
+        border-radius: 5px;
+        border: 1px solid black;
+        background-color: rgb(170, 170, 170);
     }
 </style>
