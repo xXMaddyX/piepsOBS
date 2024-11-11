@@ -46,7 +46,8 @@ class ObsSceneInfoBox extends HTMLElement {
                         sourceButton.classList.add("obs-source-info-buttons");
                         sourceButton.textContent = elem.sourceName;
                         sourceButton.addEventListener('click', () => {
-                            console.log(elem);
+                            this.sendDataForAlertBox.detail.data = elem;
+                            this.dispatchEvent(this.sendDataForAlertBox);
                         });
                         
                         this.obsSourceInfoButtons.append(sourceButton);
@@ -63,6 +64,14 @@ class ObsSceneInfoBox extends HTMLElement {
             detail: {
                 data: dataOfButton,
                 target: targetAlert
+            },
+            bubbles: true,
+            composed: true
+        });
+
+        this.sendDataForAlertBox = new CustomEvent("send-data-for-alert-box", {
+            detail: {
+                data: null
             },
             bubbles: true,
             composed: true

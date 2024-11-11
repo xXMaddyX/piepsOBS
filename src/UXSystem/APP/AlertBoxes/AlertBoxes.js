@@ -26,36 +26,61 @@ class AlertBoxes extends HTMLElement {
         this.followerActiveButton = this.shadow.querySelector('#follower-alert-activate-button');
         this.rentActiveButton = this.shadow.querySelector('#rant-alert-activate-button');
         this.subscribeActiveButton = this.shadow.querySelector('#subscribe-activate-button');
+
+        this.alertBoxBody = this.shadow.querySelector('.follower-boxes-body');
+        this.rentBoxBody = this.shadow.querySelector('.rant-boxes-body');
+        this.subBoxBody = this.shadow.querySelector('.sub-boxes-body');
+    };
+
+    setButtonCondition(state, button) {
+        if (state === true) {
+            button.style.backgroundColor = "greenyellow";
+        } else {
+            button.style.backgroundColor = "gray";
+        };
     };
 
     listeners() {
         this.followerActiveButton.addEventListener('click', () => {
             this.followerButtonState = !this.followerButtonState;
-            if (this.followerButtonState) {
-                this.followerActiveButton.style.backgroundColor = "greenyellow"
-            } else {
-                this.followerActiveButton.style.backgroundColor = "gray";
-            };
+            this.setButtonCondition(this.followerButtonState, this.followerActiveButton)
         });
 
         this.rentActiveButton.addEventListener('click', () => {
             this.rentButtonState = !this.rentButtonState;
-            if (this.rentButtonState) {
-                this.rentActiveButton.style.backgroundColor = "greenyellow"
-            } else {
-                this.rentActiveButton.style.backgroundColor = "gray";
-            };
+            this.setButtonCondition(this.rentButtonState, this.rentActiveButton);
         })
 
         this.subscribeActiveButton.addEventListener('click', () => {
             this.subscribeButtonState = !this.subscribeButtonState;
-            if (this.subscribeButtonState) {
-                this.subscribeActiveButton.style.backgroundColor = "greenyellow";
-            } else {
-                this.subscribeActiveButton.style.backgroundColor = "gray";
-            };
+            this.setButtonCondition(this.subscribeButtonState, this.subscribeActiveButton);
         });
+
+        this.addEventListener("send-alert-data-to-alert-box", (e) => {
+            let data = e.detail.data;
+            if (this.followerButtonState) {
+                const newButton = document.createElement("button");
+                newButton.innerText = e.detail.data.sourceName;
+                this.alertBoxBody.append(newButton);
+            } else if (this.rentButtonState) {
+                const newButton = document.createElement("button");
+                newButton.innerText = e.detail.data.sourceName;
+                this.rentBoxBody.append(newButton);
+            } else if (this.subscribeButtonState) {
+                const newButton = document.createElement("button");
+                newButton.innerText = e.detail.data.sourceName;
+                this.subBoxBody.append(newButton);
+            } else {
+                alert("no Box selected")
+            }
+            
+            console.log(data)
+        })
     };
+
+    handelIncomeData(data) {
+        
+    }
 
     customEvents() {
 

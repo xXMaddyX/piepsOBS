@@ -88,6 +88,12 @@ export default class MainApp extends HTMLElement {
             this.rumbleConWindow.classList.remove('open');
         });
 
+        this.addEventListener("send-data-for-alert-box", (e) => {
+            let data = e.detail.data;
+            this.sendAlertDataToAlertBox.detail.data = data;
+            this.alertContentBox.dispatchEvent(this.sendAlertDataToAlertBox);
+        });
+
         this.connectObsBtn.addEventListener('click', () => {
             ipcRenderer.invoke("connect-to-obs");
         });
@@ -105,6 +111,12 @@ export default class MainApp extends HTMLElement {
         this.obsDataLoadetEvent = new CustomEvent("obs-scene-data-loadet", {
             bubbles: true,
             composed: true,
+        });
+
+        this.sendAlertDataToAlertBox = new CustomEvent("send-alert-data-to-alert-box", {
+            detail: {
+                data: null
+            }
         });
     };
 };
