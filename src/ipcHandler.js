@@ -2,7 +2,8 @@ const { ipcMain, app, BrowserWindow } = require('electron');
 import fs from 'fs/promises';
 import path from 'path';
 import App from './obsconnect/App.js';
-import { rumbleAPIData, localStore } from './localStorage/connectionData';
+import { setAlertData, alertData } from './localStorage/alertDataStore.js';
+import AlertData from './localStorage/alertDataStore.js';
 
 const connection = new App();
 
@@ -77,6 +78,14 @@ const IpcInit = (mainWindow) => {
         };
       };
     });
+
+    //----------------------------->>>>ALERT_DATA_HANDLER<<<<------------------------------
+    //TODO_ADD_HANDLER_OBJ_FOR_ALERT_LOGIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ipcMain.handle("send-alert-data-to-backend", (e, data) => {
+      AlertData.setData(data);
+      AlertData.showAllData();
+    });
+    //-------------------------------------------------------------------------------------
     //------------------------->>>>TEST_HANDLER_REMOVE_LATER<<<<---------------------------
     //Test Handler Remove later!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     ipcMain.handle("test-Alert", async () => {

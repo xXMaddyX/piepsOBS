@@ -27,6 +27,9 @@
                 <!--Inject Subscribe Elemts-->
             </div>
         </div>
+        <div class="send-data-to-backend">
+            <button id="send-data-to-backend-button">Ativate Alerts</button>
+        </div>
     </div>
 </div>
 <style>
@@ -156,5 +159,28 @@
         border-radius: 5px;
         border: 1px solid black;
         background-color: rgb(170, 170, 170);
+    }
+
+    .send-data-to-backend {
+        display: flex;
+        flex-direction: column;
+        place-content: center;
+        place-items: center;
+        margin-top: 20px;
+    }
+
+    #send-data-to-backend-button {
+        width: 200px;
+        height: 25px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        flex-grow: unset;
+        background-color: gray;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+    }
+
+    #send-data-to-backend-button:hover {
+        background-color: rgb(160, 160, 160);
     }
 </style>

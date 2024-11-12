@@ -5,9 +5,11 @@ class AlertBoxes extends HTMLElement {
         super();
         this.shadow = this.attachShadow({mode: "open"});
         this.activeButton = null;
-        this.alertObjList = [];
-        this.rentObjList = [];
-        this.subObjList = [];
+        this.alertData = {
+            alertObjList: [],
+            rentObjList: [],
+            subObjList: [],
+        };
     };
 
     async connectedCallback () {
@@ -27,6 +29,7 @@ class AlertBoxes extends HTMLElement {
         this.followerActiveButton = this.shadow.querySelector('#follower-alert-activate-button');
         this.rentActiveButton = this.shadow.querySelector('#rant-alert-activate-button');
         this.subscribeActiveButton = this.shadow.querySelector('#subscribe-activate-button');
+        this.sendDataToBackendButton = this.shadow.querySelector('#send-data-to-backend-button');
 
         this.alertBoxBody = this.shadow.querySelector('.follower-boxes-body');
         this.rentBoxBody = this.shadow.querySelector('.rant-boxes-body');
@@ -46,6 +49,7 @@ class AlertBoxes extends HTMLElement {
         this.followerActiveButton.addEventListener('click', () => this.setActiveButton(this.followerActiveButton));
         this.rentActiveButton.addEventListener('click', () => this.setActiveButton(this.rentActiveButton));
         this.subscribeActiveButton.addEventListener('click', () => this.setActiveButton(this.subscribeActiveButton));
+        this.sendDataToBackendButton.addEventListener('click', () => ipcRenderer.invoke("send-alert-data-to-backend", this.alertData));
 
         this.addEventListener("send-alert-data-to-alert-box", (e) => {
             let data = e.detail.data;
@@ -54,19 +58,18 @@ class AlertBoxes extends HTMLElement {
 
             if (this.activeButton === this.followerActiveButton) {
                 this.alertBoxBody.append(newButton);
-                this.alertObjList.push(data);
+                this.alertData.alertObjList.push(data);
 
             } else if (this.activeButton === this.rentActiveButton) {
                 this.rentBoxBody.append(newButton);
-                this.rentObjList.push(data);
+                this.alertData.rentObjList.push(data);
 
             } else if (this.activeButton === this.subscribeActiveButton) {
                 this.subBoxBody.append(newButton);
-                this.subObjList.push(data);
+                this.alertData.subObjList.push(data);
             } else {
                 alert("No Alert Box selected");
             };
-            console.log(data);
         });
     };
 
