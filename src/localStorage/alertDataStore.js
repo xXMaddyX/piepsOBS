@@ -1,5 +1,6 @@
 class AlertDataHandler {
     constructor() {
+        this.dataIsSet = false;
         this.alertObjList = [];
         this.rentObjList = [];
         this.subObjList = [];
@@ -9,6 +10,7 @@ class AlertDataHandler {
         this.alertObjList = data.alertObjList;
         this.rentObjList = data.rentObjList;
         this.subObjList = data.subObjList;
+        this.dataIsSet = true;
     };
 
     getAlertList() {

@@ -4,12 +4,20 @@ import path from 'path';
 import App from './obsconnect/App.js';
 import { setAlertData, alertData } from './localStorage/alertDataStore.js';
 import AlertData from './localStorage/alertDataStore.js';
+import AlertHandler from './obsAlertHandler/AlertHandler.js';
 
 const connection = new App();
+/**@type {AlertHandler} */
+let alertHandler = null;
+
+const STATES = {
+  obsConnectionEnabled: false,
+  rumbleConnetctionEnabled: false,
+};
 
 const SceneStates = {
   allertState: false,
-}
+};
 
 /**@param {BrowserWindow} mainWindow*/
 const IpcInit = (mainWindow) => {
@@ -36,23 +44,34 @@ const IpcInit = (mainWindow) => {
     });
     
     ipcMain.handle("connect-to-obs", async () => {
-      await connection.initObsConnect();
-      await connection.obsInfo.getVersion();
-      await connection.initRumbleConnect();
+      if (!STATES.obsConnectionEnabled) {
+        await connection.initObsConnect();
+        await connection.obsInfo.getVersion();
+        await connection.initRumbleConnect();
 
-      //SEND_OBS_SCENE_DATA_TO_FRONTEND------------------------>
-      try {
-        const connectionAPIData = await connection.obsConnection.getSceneData();
-        windowRef.webContents.send("obs-api-data", connectionAPIData);
-      } catch (err) {
-        console.log(new Error("Data Not get", err));
+        //SEND_OBS_SCENE_DATA_TO_FRONTEND------------------------>
+        try {
+          const connectionAPIData = await connection.obsConnection.getSceneData();
+          windowRef.webContents.send("obs-api-data", connectionAPIData);
+        } catch (err) {
+          console.log(new Error("Data Not get", err));
+        };
+        STATES.obsConnectionEnabled = true;
+      } else {
+        console.log("OBS Still Connected");
       };
     });
     //-------------------------------------------------------------------------------------
     //----------------------------->>>>RUMBLE_HANDLERS<<<<---------------------------------
     ipcMain.handle("connect-to-rumble", () => {
-      connection.rubleConnection();
+      if (!STATES.rumbleConnetctionEnabled) {
+        connection.rubleConnection();
+        STATES.rumbleConnetctionEnabled = true;
+      } else {
+        console.log("Rumble Still Connected");
+      };
     });
+
     ipcMain.handle("set-rumble-data", (e, data) => {
       localStore.rumbleConfig.url = data;
     });
@@ -80,10 +99,20 @@ const IpcInit = (mainWindow) => {
     });
 
     //----------------------------->>>>ALERT_DATA_HANDLER<<<<------------------------------
-    //TODO_ADD_HANDLER_OBJ_FOR_ALERT_LOGIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     ipcMain.handle("send-alert-data-to-backend", (e, data) => {
       AlertData.setData(data);
       AlertData.showAllData();
+      if (alertHandler === null) {
+        alertHandler = new AlertHandler(connection.obsConnection.obs, connection.rubleConnection);
+        alertHandler.init();
+        alertHandler.setAlert();
+        alertHandler.setRent();
+        alertHandler.setSubscribtion();
+      } else {
+        alertHandler.setAlert();
+        alertHandler.setRent();
+        alertHandler.setSubscribtion();
+      };
     });
     //-------------------------------------------------------------------------------------
     //------------------------->>>>TEST_HANDLER_REMOVE_LATER<<<<---------------------------
