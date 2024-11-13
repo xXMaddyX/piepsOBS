@@ -29,7 +29,6 @@ class ObsSceneInfoBox extends HTMLElement {
 
     listeners() {
         this.addEventListener('obs-scene-data-loadet', () => {
-            console.log(FrontendStoreGlobal.obsDataStore);
             this.obsSourceInfoButtons.innerHTML = ""
 
             FrontendStoreGlobal.obsDataStore.forEach(item => {
@@ -42,6 +41,7 @@ class ObsSceneInfoBox extends HTMLElement {
                     const dataArr = item.sceneSourcesList;
 
                     dataArr.forEach(elem => {
+                        elem.sceneName = item.sceneName;
                         const sourceButton = document.createElement("button");
                         sourceButton.classList.add("obs-source-info-buttons");
                         sourceButton.textContent = elem.sourceName;

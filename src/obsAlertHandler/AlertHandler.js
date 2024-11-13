@@ -1,6 +1,7 @@
 import OBSWebSocket from "obs-websocket-js";
 import RumbleConnect from "../rumbleConnect/rumbleConnect";
 import AlertData from "../localStorage/alertDataStore";
+import timerHandler from "./handlerCallsAndTimer";
 import { localStore } from "../localStorage/connectionData";
 
 export default class AlertHandler {
@@ -9,7 +10,7 @@ export default class AlertHandler {
         this.obs = obs;
         /**@type {RumbleConnect} */
         this.rumble = rumble;
-        this.DEFAULT_INTERVALL = 3000;
+        this.DEFAULT_INTERVALL = 1000;
         this.alertListElements = [];
         this.rentListElements = [];
         this.subListElements = [];
@@ -23,6 +24,7 @@ export default class AlertHandler {
         if (AlertData.alertObjList.length > 0) {
             AlertData.alertObjList.forEach(item => {
                 const dataObj = {
+                    sceneName: item.sceneName,
                     sourceName: item.sourceName,
                     sourceUuid: item.sourceUuid,
                     sceneItemEnabled: item.sceneItemEnabled
@@ -38,6 +40,7 @@ export default class AlertHandler {
         if (AlertData.rentObjList.length > 0) {
             AlertData.rentObjList.forEach(item => {
                 const dataObj = {
+                    sceneName: item.sceneName,
                     sourceName: item.sourceName,
                     sourceUuid: item.sourceUuid,
                     sceneItemEnabled: item.sceneItemEnabled
@@ -53,6 +56,7 @@ export default class AlertHandler {
         if (AlertData.subObjList.length > 0) {
             AlertData.subObjList.forEach(item => {
                 const dataObj = {
+                    sceneName: item.sceneName,
                     sourceName: item.sourceName,
                     sourceUuid: item.sourceUuid,
                     sceneItemEnabled: item.sceneItemEnabled
@@ -65,7 +69,7 @@ export default class AlertHandler {
     };
     
     handleDataInLoop = () => {
-        console.log("AlertHandler is Running");
+        timerHandler.handleAlertTimer(this.obs, this.alertListElements);
     };
 
     setAlertHandlerLoop = () => {

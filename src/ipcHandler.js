@@ -101,7 +101,6 @@ const IpcInit = (mainWindow) => {
     //----------------------------->>>>ALERT_DATA_HANDLER<<<<------------------------------
     ipcMain.handle("send-alert-data-to-backend", (e, data) => {
       AlertData.setData(data);
-      AlertData.showAllData();
       if (alertHandler === null) {
         alertHandler = new AlertHandler(connection.obsConnection.obs, connection.rubleConnection);
         alertHandler.init();

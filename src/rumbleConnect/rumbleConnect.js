@@ -20,6 +20,8 @@ export default class RumbleConnect {
             let raw = await fetch(this.url);
             this.rumbleApiDataOnLoad = await raw.json();
             this.saveToLocalStorage();
+            //CONSOLE LOG !!!!!!!!!!!!!!!!
+            //REMOVE LATER
             console.log(this.rumbleApiDataOnLoad);
         } catch (err) {
             console.error(err);
