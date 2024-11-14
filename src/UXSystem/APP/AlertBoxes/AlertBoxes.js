@@ -36,7 +36,6 @@ class AlertBoxes extends HTMLElement {
         this.subBoxBody = this.shadow.querySelector('.sub-boxes-body');
     };
 
-
     setActiveButton(button) {
         if (this.activeButton) {
             this.activeButton.style.backgroundColor = "gray";
@@ -97,18 +96,6 @@ class AlertBoxes extends HTMLElement {
                 alert("No Alert Box selected");
             };
         });
-    };
-
-    handelIncomeData(data) {
-        
-    }
-
-    customEvents() {
-
-    };
-
-    ipcHandler() {
-
     };
 };
 
