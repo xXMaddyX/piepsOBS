@@ -39,7 +39,6 @@ class TimerHandler {
     //---------------------------->>>>FOLLOWER_ALERTS<<<<------------------------
     //SHOW_AND_HIDE_FUNCTIONS---------------------->
     async showFollowerElement(element) {
-        console.log(element)
         let sourceId = await this.obsCon.call("GetSceneItemId", {
             sceneName: element.sceneName,
             sourceName: element.sourceName
@@ -110,10 +109,10 @@ class TimerHandler {
     }
     //CHECK_FOR_CHANGES_IN_FOLLOWERS----------------->
     checkForFollowerChange() {
-        if (rumbleAPIData.currentFollowersNums < this.testNumber) {
+        if (rumbleAPIData.currentFollowersNums < rumbleAPIData.newFollowersNums) {
             this.showFollower = true;
             this.followerHidden = false;
-            rumbleAPIData.currentFollowersNums = this.testNumber;
+            rumbleAPIData.currentFollowersNums = rumbleAPIData.newFollowersNums;
         };
     };
     //-------------------------------------------------------------------------------------

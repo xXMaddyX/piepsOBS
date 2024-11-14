@@ -32,10 +32,11 @@ export default class RumbleConnect {
             rumbleAPIData.rumbleCurrentAPIData = await raw.json();
             rumbleAPIData.newFollowersNums = rumbleAPIData.rumbleCurrentAPIData.followers.num_followers;
             rumbleAPIData.lastFollowerName = rumbleAPIData.rumbleCurrentAPIData.followers.latest_follower.username;
+
+            if (rumbleAPIData.newFollowersNums < rumbleAPIData.currentFollowersNums) {
+                rumbleAPIData.currentFollowersNums = rumbleAPIData.newFollowersNums;
+            };
             console.log(`Is Running ${rumbleAPIData.rumbleCurrentAPIData.username}'s Stream!!!`);
-            //TEST
-            console.log(rumbleAPIData.currentFollowersNums);
-            console.log(rumbleAPIData.newFollowersNums);
         } catch (err) {
             console.error(err);
         };
