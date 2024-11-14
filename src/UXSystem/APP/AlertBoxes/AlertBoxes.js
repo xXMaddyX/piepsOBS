@@ -53,20 +53,46 @@ class AlertBoxes extends HTMLElement {
 
         this.addEventListener("send-alert-data-to-alert-box", (e) => {
             let data = e.detail.data;
+            const buttonContainer = document.createElement("div");
+            buttonContainer.classList.add("button-box");
+
             const newButton = document.createElement("button");
             newButton.innerText = data.sourceName;
 
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "X";
+            deleteButton.addEventListener('click', () => {
+                newButton.remove();
+                deleteButton.remove();
+                buttonContainer.remove();
+
+                const targetArray = buttonContainer.targetArray;
+                const { sourceName } = data;
+
+                const index = targetArray.findIndex(item => item.sourceName === sourceName);
+                if (index !== -1) {
+                    targetArray.splice(index, 1);
+                };
+                console.log(this.alertData);
+            });
+
+            buttonContainer.append(newButton, deleteButton);
+
             if (this.activeButton === this.followerActiveButton) {
-                this.alertBoxBody.append(newButton);
+                this.alertBoxBody.append(buttonContainer);
                 this.alertData.alertObjList.push(data);
-
+                buttonContainer.targetArray = this.alertData.alertObjList;
+            
             } else if (this.activeButton === this.rentActiveButton) {
-                this.rentBoxBody.append(newButton);
+                this.rentBoxBody.append(buttonContainer);
                 this.alertData.rentObjList.push(data);
-
+                buttonContainer.targetArray = this.alertData.rentObjList;
+            
             } else if (this.activeButton === this.subscribeActiveButton) {
-                this.subBoxBody.append(newButton);
+                this.subBoxBody.append(buttonContainer);
                 this.alertData.subObjList.push(data);
+                buttonContainer.targetArray = this.alertData.subObjList;
+            
             } else {
                 alert("No Alert Box selected");
             };

@@ -15,7 +15,8 @@ class TimerHandler {
         this.followerHidden = false;
 
         this.rentDisableOnStart = false;
-        //REMOVE
+
+        //REMOVE_ON_PRODUCTION
         this.testNumber = 2
     };
 

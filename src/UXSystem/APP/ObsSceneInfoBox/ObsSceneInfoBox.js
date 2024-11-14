@@ -49,7 +49,6 @@ class ObsSceneInfoBox extends HTMLElement {
                             this.sendDataForAlertBox.detail.data = elem;
                             this.dispatchEvent(this.sendDataForAlertBox);
                         });
-                        
                         this.obsSourceInfoButtons.append(sourceButton);
                     });
                 });

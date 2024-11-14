@@ -86,6 +86,7 @@
     .follower-boxes-body {
         display: flex;
         flex-direction: column;
+        padding: 5px;
         min-height: 120px;
         min-width: 300px;
         border-radius: 5px;
@@ -120,6 +121,7 @@
     .rant-boxes-body {
         display: flex;
         flex-direction: column;
+        padding: 5px;
         min-height: 120px;
         min-width: 300px;
         border-radius: 5px;
@@ -154,6 +156,7 @@
     .sub-boxes-body {
         display: flex;
         flex-direction: column;
+        padding: 5px;
         min-height: 120px;
         min-width: 300px;
         border-radius: 5px;
@@ -182,5 +185,32 @@
 
     #send-data-to-backend-button:hover {
         background-color: rgb(160, 160, 160);
+    }
+
+    .button-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 5px;
+    }
+
+    .button-box button {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        flex-grow: unset;
+        background-color: gray;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+    }
+
+    .button-box button:nth-child(1) {
+        width: 150px;
+    }
+
+    .button-box button:nth-child(2):hover {
+        background-color: red;
     }
 </style>
