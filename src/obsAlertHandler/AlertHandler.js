@@ -1,7 +1,7 @@
 import OBSWebSocket from "obs-websocket-js";
 import RumbleConnect from "../rumbleConnect/rumbleConnect";
 import AlertData from "../localStorage/alertDataStore";
-import timerHandler from "./handlerCallsAndTimer";
+import TimerHandler from "./handlerCallsAndTimer.js";
 import { localStore } from "../localStorage/connectionData";
 
 export default class AlertHandler {
@@ -17,6 +17,7 @@ export default class AlertHandler {
     };
 
     init() {
+        this.callHandler =  new TimerHandler(this.obs);
         this.setAlertHandlerLoop();
     }
 
@@ -69,7 +70,7 @@ export default class AlertHandler {
     };
     
     handleDataInLoop = () => {
-        timerHandler.handleAlertTimer(this.obs, this.alertListElements);
+        this.callHandler.handleAlertTimer(this.alertListElements);
     };
 
     setAlertHandlerLoop = () => {
