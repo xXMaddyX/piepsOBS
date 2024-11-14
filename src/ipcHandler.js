@@ -30,14 +30,10 @@ const IpcInit = (mainWindow) => {
     });
     //SAVE_SETTINGS_TO_LOCAL_FILE
     ipcMain.handle("save-data-to-file", () => {
-      
+      //PLANT TO SAVE SETTINGS CONFIG
     });
     //-------------------------------------------------------------------------------------
     //------------------------------>>>>OBS_HANDLERS<<<<-----------------------------------
-    ipcMain.handle("getObsVersion", () => {
-      return rumbleAPIData.numOfFollowers;
-    });
-    
     ipcMain.handle("set-obs-data", (e, data) => {
       localStore.obsConfig.adress = data.adress;
       localStore.obsConfig.password = data.password;
@@ -100,6 +96,7 @@ const IpcInit = (mainWindow) => {
 
     //----------------------------->>>>ALERT_DATA_HANDLER<<<<------------------------------
     ipcMain.handle("send-alert-data-to-backend", (e, data) => {
+      console.log(data)
       AlertData.setData(data);
       if (alertHandler === null) {
         alertHandler = new AlertHandler(connection.obsConnection.obs, connection.rubleConnection);

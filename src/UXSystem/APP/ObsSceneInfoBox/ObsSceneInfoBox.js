@@ -35,7 +35,6 @@ class ObsSceneInfoBox extends HTMLElement {
                 const obsSceneButton = document.createElement("button");
                 obsSceneButton.classList.add("obs-scene-info-buttons");
                 obsSceneButton.textContent = item.sceneName;
-                console.log(item)
 
                 obsSceneButton.addEventListener('click', () => {
                     this.obsSourceInfoButtons.innerHTML = "";

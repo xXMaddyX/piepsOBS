@@ -9,11 +9,16 @@ const localStore = {
 };
 
 const rumbleAPIData = {
-    rubleAPIData: null,
-    numOfFollowers: ""
-}
+    rumbleStartAPIData: null,
+    rumbleCurrentAPIData: null,
+    
+    currentFollowersNums: null,
+    newFollowersNums: null,
+
+    lastFollowerName: null,
+};
 
 export {
     localStore,
     rumbleAPIData
-}
+};

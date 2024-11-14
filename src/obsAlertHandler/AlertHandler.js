@@ -25,6 +25,7 @@ export default class AlertHandler {
         if (AlertData.alertObjList.length > 0) {
             AlertData.alertObjList.forEach(item => {
                 const dataObj = {
+                    inputKind: item.inputKind,
                     sceneName: item.sceneName,
                     sourceName: item.sourceName,
                     sourceUuid: item.sourceUuid,
@@ -41,6 +42,7 @@ export default class AlertHandler {
         if (AlertData.rentObjList.length > 0) {
             AlertData.rentObjList.forEach(item => {
                 const dataObj = {
+                    inputKind: item.inputKind,
                     sceneName: item.sceneName,
                     sourceName: item.sourceName,
                     sourceUuid: item.sourceUuid,
@@ -57,6 +59,7 @@ export default class AlertHandler {
         if (AlertData.subObjList.length > 0) {
             AlertData.subObjList.forEach(item => {
                 const dataObj = {
+                    inputKind: item.inputKind,
                     sceneName: item.sceneName,
                     sourceName: item.sourceName,
                     sourceUuid: item.sourceUuid,
