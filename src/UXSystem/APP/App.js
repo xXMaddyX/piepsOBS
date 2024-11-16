@@ -3,6 +3,7 @@ import '/src/UXSystem/OBSConnectionInput/OBSConnectionInput.js';
 import '/src/UXSystem/APP/RumbleConnectionInput/RumbleConnectionInput.js';
 import '/src/UXSystem/APP/ObsSceneInfoBox/ObsSceneInfoBox.js';
 import '/src/UXSystem/APP/AlertBoxes/AlertBoxes.js';
+import '/src/UXSystem/APP/ChatBoxAndFollower/ChatAndFollower.js';
 import { AppHTML } from './AppHTML.js';
 import { FrontendStoreGlobal } from '../frontendStore/frontendStore.js';
 const { ipcRenderer } = require("electron");
@@ -42,6 +43,7 @@ export default class MainApp extends HTMLElement {
 
         this.AppSceneInfoContent = this.shadow.querySelector('.app-main-scene-info');
         this.AppAlertContent = this.shadow.querySelector('.app-main-set-alerts');
+        this.AppChatContent = this.shadow.querySelector('.app-main-set-chat');
         
         //Test Item Remove it later
         this.testAlert = this.shadow.querySelector('#test-Alert');
@@ -69,6 +71,10 @@ export default class MainApp extends HTMLElement {
         //ALERT_COMPONENTS
         this.alertContentBox = document.createElement('alert-boxes');
         this.AppAlertContent.append(this.alertContentBox);
+
+        //CHAT_AND_FOLLOWER_COMPONENT
+        this.chatAndFollowerContentBox = document.createElement('chat-and-follower');
+        this.AppChatContent.append(this.chatAndFollowerContentBox);
     };
 
     listeners() {
