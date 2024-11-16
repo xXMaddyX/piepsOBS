@@ -104,10 +104,12 @@ const IpcInit = (mainWindow) => {
         alertHandler.setAlert();
         alertHandler.setRent();
         alertHandler.setSubscribtion();
+        alertHandler.setChat();
       } else {
         alertHandler.setAlert();
         alertHandler.setRent();
         alertHandler.setSubscribtion();
+        alertHandler.setChat();
       };
     });
     //-------------------------------------------------------------------------------------

@@ -4,12 +4,14 @@ class AlertDataHandler {
         this.alertObjList = [];
         this.rentObjList = [];
         this.subObjList = [];
+        this.chatObjList = [];
     };
 
     setData(data) {
         this.alertObjList = data.alertObjList;
         this.rentObjList = data.rentObjList;
         this.subObjList = data.subObjList;
+        this.chatObjList = data.chatObjList;
         this.dataIsSet = true;
     };
 
@@ -25,11 +27,16 @@ class AlertDataHandler {
         return this.subObjList;
     };
 
+    getChatList() {
+        return this.chatObjList;
+    }
+
     showAllData() {
         const obj = {
             alertListData: this.alertObjList,
             rentListData: this.rentObjList,
-            subListData: this.subObjList
+            subListData: this.subObjList,
+            chatListData: this.chatObjList,
         };
         console.log(obj);
     };

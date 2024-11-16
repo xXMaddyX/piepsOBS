@@ -8,13 +8,19 @@ class TimerHandler {
         this.rentAlertShow = false;
         this.subAlertShow = false;
 
+        //FOLLOWER_ALERT--------------------->
         this.followerDisabledOnStart = false;
         this.FOLLOWER_SHOW_TIMER = 8;
         this.DEFAULT_FOLLOWER_SHOW_TIMER = 8;
         this.showFollower = false;
         this.followerHidden = false;
 
+        //RENT_ALERT_STATES------------------>
         this.rentDisableOnStart = false;
+
+        //CHAT_STATES------------------------>
+        this.currentChatLength = 0;
+        this.newChatLength = 0;
 
         //REMOVE_ON_PRODUCTION
         this.testNumber = 2
@@ -131,6 +137,12 @@ class TimerHandler {
     //-------------------------------------------------------------------------------------
     //------------------------>>>>SUBSCRIPER_ALLERTS---------------------------------------
     handleSubTimer(alertData) {
+
+    };
+
+    //-------------------------------------------------------------------------------------
+    //------------------------------->>>>HANDLE_CHAT<<<<-----------------------------------
+    handelChat(alertData) {
 
     };
 };

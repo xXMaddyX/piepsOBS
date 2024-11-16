@@ -14,6 +14,7 @@ export default class AlertHandler {
         this.alertListElements = [];
         this.rentListElements = [];
         this.subListElements = [];
+        this.chatListElements = [];
     };
 
     init() {
@@ -69,6 +70,23 @@ export default class AlertHandler {
             });
         } else {
             console.log("no Data in Sub Data");
+        };
+    };
+
+    setChat() {
+        if (AlertData.chatObjList.length > 0) {
+            AlertData.chatObjList.forEach(item => {
+                const dataObj = {
+                    inputKind: item.inputKind,
+                    sceneName: item.sceneName,
+                    sourceName: item.sourceName,
+                    sourceUuid: item.sourceUuid,
+                    sceneItemEnabled: item.sceneItemEnabled
+                };
+                this.chatListElements.push(dataObj);
+            });
+        } else {
+            console.log("no Data in Chat Data");
         };
     };
     
