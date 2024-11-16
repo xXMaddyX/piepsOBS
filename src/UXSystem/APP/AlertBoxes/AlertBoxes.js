@@ -9,6 +9,8 @@ class AlertBoxes extends HTMLElement {
             alertObjList: [],
             rentObjList: [],
             subObjList: [],
+            chatObjList: [],
+            followerObjList: [],
         };
     };
 
@@ -29,11 +31,15 @@ class AlertBoxes extends HTMLElement {
         this.followerActiveButton = this.shadow.querySelector('#follower-alert-activate-button');
         this.rentActiveButton = this.shadow.querySelector('#rant-alert-activate-button');
         this.subscribeActiveButton = this.shadow.querySelector('#subscribe-activate-button');
+        this.chatActiveButton = this.shadow.querySelector('#chat-box-activate-button');
+        this.followerNumberActiveButton = this.shadow.querySelector('#follower-box-active-button');
         this.sendDataToBackendButton = this.shadow.querySelector('#send-data-to-backend-button');
 
         this.alertBoxBody = this.shadow.querySelector('.follower-boxes-body');
         this.rentBoxBody = this.shadow.querySelector('.rant-boxes-body');
         this.subBoxBody = this.shadow.querySelector('.sub-boxes-body');
+        this.chatBoxBody = this.shadow.querySelector('.chat-box-body');
+        this.followerBoxBody = this.shadow.querySelector('.follower-box-body');
     };
 
     setActiveButton(button) {
@@ -48,6 +54,8 @@ class AlertBoxes extends HTMLElement {
         this.followerActiveButton.addEventListener('click', () => this.setActiveButton(this.followerActiveButton));
         this.rentActiveButton.addEventListener('click', () => this.setActiveButton(this.rentActiveButton));
         this.subscribeActiveButton.addEventListener('click', () => this.setActiveButton(this.subscribeActiveButton));
+        this.chatActiveButton.addEventListener('click', () => this.setActiveButton(this.chatActiveButton));
+        this.followerNumberActiveButton.addEventListener('click', () => this.setActiveButton(this.followerNumberActiveButton));
         this.sendDataToBackendButton.addEventListener('click', () => ipcRenderer.invoke("send-alert-data-to-backend", this.alertData));
 
         this.addEventListener("send-alert-data-to-alert-box", (e) => {
@@ -91,7 +99,17 @@ class AlertBoxes extends HTMLElement {
                 this.subBoxBody.append(buttonContainer);
                 this.alertData.subObjList.push(data);
                 buttonContainer.targetArray = this.alertData.subObjList;
-            
+
+            } else if (this.activeButton === this.chatActiveButton) {
+                this.chatBoxBody.append(buttonContainer);
+                this.alertData.chatObjList.push(data);
+                buttonContainer.targetArray = this.alertData.chatObjList;
+
+            } else if (this.activeButton === this.followerNumberActiveButton) {
+                this.followerBoxBody.append(buttonContainer);
+                this.alertData.followerObjList.push(data);
+                buttonContainer.targetArray = this.alertData.followerObjList;
+
             } else {
                 alert("No Alert Box selected");
             };

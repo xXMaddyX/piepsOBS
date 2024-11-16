@@ -31,17 +31,37 @@
             <button id="send-data-to-backend-button">Activate Alerts</button>
         </div>
     </div>
+    <div class="chat-and-follower-box-content">
+        <div class="chat-box">
+            <div class="chat-box-header">
+                <h3>Chat Box</h3>
+                <button id="chat-box-activate-button">Select</button>
+            </div>
+            <div class="chat-box-body">
+                <!--INJECT ACTIVE ELEMENTS-->
+            </div>
+        </div>
+        <div class="follower-box">
+            <div class="follower-box-header">
+                <h3>Follower Box</h3>
+                <button id="follower-box-active-button">Select</button>
+            </div>
+            <div class="follower-box-body">
+                <!--INJECT ACTIVE ELEMENTS-->
+            </div>
+        </div>
+    </div>
 </div>
 <style>
     /*--------------------------------------MAIN_BOX-----------------------------------------*/
     .alert-boxes-box {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
         background-color: orange;
-        min-width: 300px;
-        max-width: 300px;
+        min-width: 600px;
+        max-width: 600px;
         min-height: calc(100vh - 30px);
         padding-left: 15px;
         padding-right: 15px;
@@ -54,9 +74,31 @@
     
     .alert-boxes-content {
         display: flex;
+        margin-left: 20px;
         flex-direction: column;
-        place-content: center;
-        place-items: center;
+        justify-content: center;
+        align-items: center;
+        background-color: orange;
+        min-width: 300px;
+        max-width: 300px;
+        min-height: calc(100vh - 30px);
+        padding-left: 15px;
+        padding-right: 15px;
+        border-left: 1px solid black;
+    }
+
+    .chat-and-follower-box-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: orange;
+        min-width: 300px;
+        max-width: 300px;
+        min-height: calc(100vh - 30px);
+        padding-left: 15px;
+        padding-right: 15px;
+        border-left: 1px solid black;
     }
     /*---------------------------------------------------------------------------------------*/
     /*---------------------------------FOLLOWER_ALERT_BOX------------------------------------*/
@@ -163,7 +205,78 @@
         border: 1px solid black;
         background-color: rgb(170, 170, 170);
     }
+    /*----------------------------------------------------------------------------------------*/
+    /*------------------------------------------CHAT_BOX--------------------------------------*/
+    .chat-box {
+        display: flex;
+        flex-direction: column;
+        place-content: center;
+        place-items: center;
+    }
 
+    .chat-box-header {
+        place-items: center;
+        place-content: center;
+    }
+
+    #chat-box-activate-button {
+        width: 200px;
+        height: 25px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        flex-grow: unset;
+        background-color: gray;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+    }
+
+    .chat-box-body {
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        min-height: 120px;
+        min-width: 300px;
+        border-radius: 5px;
+        border: 1px solid black;
+        background-color: rgb(170, 170, 170);
+    }
+    /*----------------------------------------------------------------------------------------*/
+    /*----------------------------------------FOLLOWER_BOX------------------------------------*/
+    .follower-box {
+        display: flex;
+        flex-direction: column;
+        place-content: center;
+        place-items: center;
+    }
+
+    .follower-box-header {
+        place-items: center;
+        place-content: center;
+    }
+
+    #follower-box-active-button {
+        width: 200px;
+        height: 25px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        flex-grow: unset;
+        background-color: gray;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+    }
+
+    .follower-box-body {
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        min-height: 120px;
+        min-width: 300px;
+        border-radius: 5px;
+        border: 1px solid black;
+        background-color: rgb(170, 170, 170);
+    }
+    /*----------------------------------------------------------------------------------------*/
+    /*---------------------------------SEND_DATA_TO_BACKEND-----------------------------------*/
     .send-data-to-backend {
         display: flex;
         flex-direction: column;
