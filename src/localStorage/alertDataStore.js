@@ -5,6 +5,7 @@ class AlertDataHandler {
         this.rentObjList = [];
         this.subObjList = [];
         this.chatObjList = [];
+        this.followerObjList = [];
     };
 
     setData(data) {
@@ -12,6 +13,7 @@ class AlertDataHandler {
         this.rentObjList = data.rentObjList;
         this.subObjList = data.subObjList;
         this.chatObjList = data.chatObjList;
+        this.followerObjList = data.followerObjList;
         this.dataIsSet = true;
     };
 
@@ -31,12 +33,17 @@ class AlertDataHandler {
         return this.chatObjList;
     }
 
+    getFollowerList() {
+        return this.followerObjList;
+    }
+
     showAllData() {
         const obj = {
             alertListData: this.alertObjList,
             rentListData: this.rentObjList,
             subListData: this.subObjList,
             chatListData: this.chatObjList,
+            followerListData: this.followerObjList,
         };
         console.log(obj);
     };

@@ -15,6 +15,7 @@ export default class AlertHandler {
         this.rentListElements = [];
         this.subListElements = [];
         this.chatListElements = [];
+        this.followerListElements = [];
     };
 
     init() {
@@ -87,6 +88,23 @@ export default class AlertHandler {
             });
         } else {
             console.log("no Data in Chat Data");
+        };
+    };
+
+    setFollowers() {
+        if (AlertData.followerObjList.length > 0) {
+            AlertData.followerObjList.forEach(item => {
+                const dataObj = {
+                    inputKind: item.inputKind,
+                    sceneName: item.sceneName,
+                    sourceName: item.sourceName,
+                    sourceUuid: item.sourceUuid,
+                    sceneItemEnabled: item.sceneItemEnabled
+                };
+                this.followerListElements.push(dataObj);
+            });
+        } else {
+            console.log("no Data in Follower Data");
         };
     };
     
