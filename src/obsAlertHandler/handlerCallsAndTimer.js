@@ -143,7 +143,17 @@ class TimerHandler {
     //-------------------------------------------------------------------------------------
     //------------------------------->>>>HANDLE_CHAT<<<<-----------------------------------
     handelChat(alertData) {
-
+        if (rumbleAPIData.newChat != null && rumbleAPIData.currentChat != null) {
+            if (rumbleAPIData.newChat.length > rumbleAPIData.currentChat.length) {
+                let chatDifference = rumbleAPIData.newChat.length - rumbleAPIData.currentChat.length;
+                console.log(chatDifference)
+                for (let i = 0; i < chatDifference; i++) {
+                    //THIS MESSAGE MUST ADD TO OBS CHAT LOG
+                    console.log(rumbleAPIData.newChat[i]);
+                }
+                rumbleAPIData.currentChat = rumbleAPIData.newChat;
+            };
+        }
     };
 };
 

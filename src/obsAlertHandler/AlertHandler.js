@@ -110,6 +110,7 @@ export default class AlertHandler {
     
     handleDataInLoop = () => {
         this.callHandler.handleAlertTimer(this.alertListElements);
+        this.callHandler.handelChat(this.chatListElements);
     };
 
     setAlertHandlerLoop = () => {

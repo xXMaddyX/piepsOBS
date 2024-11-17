@@ -41,14 +41,13 @@ export default class RumbleConnect {
                 rumbleAPIData.currentFollowersNums = rumbleAPIData.newFollowersNums;
             };
 
-            let liveStream = rumbleAPIData.rumbleStartAPIData.livestreams;
+            let liveStream = rumbleAPIData.rumbleCurrentAPIData.livestreams;
             if (liveStream.length > 0) {
                 rumbleAPIData.currentViewsers = liveStream[0].watching_now;
             };
             if (liveStream[0].chat.recent_messages.length > 0) {
                 rumbleAPIData.newChat = liveStream[0].chat.recent_messages;
             };
-            console.log(rumbleAPIData.newChat);
             console.log(`Is Running ${rumbleAPIData.rumbleCurrentAPIData.username}'s Stream!!!`);
         } catch (err) {
             console.error(err);
