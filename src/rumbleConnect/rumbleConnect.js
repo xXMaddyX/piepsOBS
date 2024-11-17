@@ -18,9 +18,13 @@ export default class RumbleConnect {
             let raw = await fetch(this.url);
             rumbleAPIData.rumbleStartAPIData = await raw.json();
             rumbleAPIData.currentFollowersNums = rumbleAPIData.rumbleStartAPIData.followers.num_followers;
-            //CONSOLE LOG !!!!!!!!!!!!!!!!
-            //REMOVE LATER
-            console.log(rumbleAPIData.rumbleStartAPIData);
+            let liveStream = rumbleAPIData.rumbleStartAPIData.livestreams;
+            if (liveStream.length > 0) {
+                rumbleAPIData.currentViewsers = liveStream[0].watching_now;
+            };
+            if (liveStream[0].chat.recent_messages.length > 0) {
+                rumbleAPIData.currentChat = liveStream[0].chat.recent_messages;
+            };
         } catch (err) {
             console.error(err);
         };
@@ -36,6 +40,15 @@ export default class RumbleConnect {
             if (rumbleAPIData.newFollowersNums < rumbleAPIData.currentFollowersNums) {
                 rumbleAPIData.currentFollowersNums = rumbleAPIData.newFollowersNums;
             };
+
+            let liveStream = rumbleAPIData.rumbleStartAPIData.livestreams;
+            if (liveStream.length > 0) {
+                rumbleAPIData.currentViewsers = liveStream[0].watching_now;
+            };
+            if (liveStream[0].chat.recent_messages.length > 0) {
+                rumbleAPIData.newChat = liveStream[0].chat.recent_messages;
+            };
+            console.log(rumbleAPIData.newChat);
             console.log(`Is Running ${rumbleAPIData.rumbleCurrentAPIData.username}'s Stream!!!`);
         } catch (err) {
             console.error(err);
