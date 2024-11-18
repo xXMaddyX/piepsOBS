@@ -142,18 +142,18 @@ class TimerHandler {
 
     //-------------------------------------------------------------------------------------
     //------------------------------->>>>HANDLE_CHAT<<<<-----------------------------------
-    handelChat(alertData) {
+    async handelChat(alertData) {
         if (rumbleAPIData.newChat != null && rumbleAPIData.currentChat != null) {
             if (rumbleAPIData.newChat.length > rumbleAPIData.currentChat.length) {
                 let chatDifference = rumbleAPIData.newChat.length - rumbleAPIData.currentChat.length;
                 for (let i = 0; i < chatDifference; i++) {
-                    alertData.forEach(item => {
+                    for (let item of alertData) {
                         if (item.inputKind === "text_gdiplus_v3") {
-                            this.addMSGToOBSChatWindow(item, rumbleAPIData.newChat[i].username, rumbleAPIData.newChat[i].text);
+                            await this.addMSGToOBSChatWindow(item, rumbleAPIData.newChat[i].username, rumbleAPIData.newChat[i].text);
                         };
-                    });
-                    console.log(rumbleAPIData.newChat[i]);
-                }
+                    };
+                    //console.log(rumbleAPIData.newChat[i]);
+                };
                 rumbleAPIData.currentChat = rumbleAPIData.newChat;
             };
         }
