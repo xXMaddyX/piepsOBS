@@ -2,6 +2,7 @@ import OBSWebSocket from "obs-websocket-js";
 import RumbleConnect from "../rumbleConnect/rumbleConnect";
 import AlertData from "../localStorage/alertDataStore";
 import TimerHandler from "./handlerCallsAndTimer.js";
+import UserCommands from "./UserCommands.js";
 import { localStore } from "../localStorage/connectionData";
 
 export default class AlertHandler {
@@ -16,6 +17,8 @@ export default class AlertHandler {
         this.subListElements = [];
         this.chatListElements = [];
         this.followerListElements = [];
+        //OBS_USER_COMMANDS_POOL--------------------------------->
+        this.userCommandPool = [];
     };
 
     init() {
@@ -107,10 +110,23 @@ export default class AlertHandler {
             console.log("no Data in Follower Data");
         };
     };
+
+    createUserCommand(scene, sceneObj, duration) {
+        //TRY TO IMPLEMENT EVENT LISTENER FOR SELF DELETE!!!!!!!!!!!!!!!!!!!!!!!!!
+        let newUserCommand = new UserCommands(obs, scene, sceneObj, duration);
+        this.userCommandPool.push(newUserCommand);
+    };
     
     handleDataInLoop = () => {
         this.callHandler.handleAlertTimer(this.alertListElements);
         this.callHandler.handelChat(this.chatListElements);
+
+        //USER_COMMAND_POOL_LOOP----------------------------------->
+        if (this.userCommandPool.length > 0) {
+            this.userCommandPool.forEach(item => {
+                item.update();
+            });
+        };
     };
 
     setAlertHandlerLoop = () => {

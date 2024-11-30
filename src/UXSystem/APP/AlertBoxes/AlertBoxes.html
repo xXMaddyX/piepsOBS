@@ -50,6 +50,19 @@
                 <!--INJECT ACTIVE ELEMENTS-->
             </div>
         </div>
+        <div class="custom-user-actions">
+            <div class="custom-user-action-header">
+                <h3>Custom User Actions</h3>
+            </div>
+            <div class="custom-user-action-body">
+                <ul class="custom-user-action-body-list">
+                    <!--INJECT_CUSTOM_USER_ACTIONS-->
+                </ul>
+            </div>
+            <div class="custom-user-action-button-box">
+                <button id="custom-user-action-button">Add A Custom Action</button>
+            </div>
+        </div>
     </div>
 </div>
 <style>
@@ -325,5 +338,45 @@
 
     .button-box button:nth-child(2):hover {
         background-color: red;
+    }
+    /*-------------------------------------------------------------------------------------------------*/
+    .custom-user-actions {
+        display: flex;
+        flex-direction: column;
+        place-content: center;
+        place-items: center;
+        margin-top: 20px;
+    }
+
+    .custom-user-action-header {
+        place-items: center;
+        place-content: center;
+    }
+
+    .custom-user-action-body {
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        min-height: 120px;
+        min-width: 300px;
+        border-radius: 5px;
+        border: 1px solid black;
+        background-color: rgb(170, 170, 170);
+    }
+
+    #custom-user-action-button {
+        width: 200px;
+        height: 25px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        flex-grow: unset;
+        background-color: gray;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+    }
+
+    #custom-user-action-button:hover {
+        background-color: greenyellow;
     }
 </style>

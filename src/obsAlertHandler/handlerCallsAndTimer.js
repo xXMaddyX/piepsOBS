@@ -146,7 +146,7 @@ class TimerHandler {
         if (rumbleAPIData.newChat != null && rumbleAPIData.currentChat != null) {
             if (rumbleAPIData.newChat.length > rumbleAPIData.currentChat.length) {
                 let chatDifference = rumbleAPIData.newChat.length - rumbleAPIData.currentChat.length;
-                for (let i = 0; i < chatDifference; i++) {
+                for (let i = chatDifference - 1; i >= 0; i--) {
                     for (let item of alertData) {
                         if (item.inputKind === "text_gdiplus_v3") {
                             await this.addMSGToOBSChatWindow(item, rumbleAPIData.newChat[i].username, rumbleAPIData.newChat[i].text);
@@ -164,7 +164,7 @@ class TimerHandler {
             inputUuid: element.sourceUuid,
         });
         const currentText = response.inputSettings.text || '';
-        const newText = `${currentText}\n${username}: ${msg}`;
+        const newText = `${currentText}\n${username}${"⭐"}: ${msg}`;
     
         let lines = newText.split('\n');
         if (lines.length > 50) {

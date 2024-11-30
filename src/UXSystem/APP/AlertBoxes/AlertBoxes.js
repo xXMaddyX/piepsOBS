@@ -5,6 +5,7 @@ class AlertBoxes extends HTMLElement {
         super();
         this.shadow = this.attachShadow({mode: "open"});
         this.activeButton = null;
+        this.customActionWindowOpen = false;
         this.alertData = {
             alertObjList: [],
             rentObjList: [],
@@ -40,6 +41,9 @@ class AlertBoxes extends HTMLElement {
         this.subBoxBody = this.shadow.querySelector('.sub-boxes-body');
         this.chatBoxBody = this.shadow.querySelector('.chat-box-body');
         this.followerBoxBody = this.shadow.querySelector('.follower-box-body');
+
+        this.customUserActions = this.shadow.querySelector('.custom-user-action-body-list');
+        this.customUserButton = this.shadow.querySelector('#custom-user-action-button');
     };
 
     setActiveButton(button) {
@@ -57,6 +61,7 @@ class AlertBoxes extends HTMLElement {
         this.chatActiveButton.addEventListener('click', () => this.setActiveButton(this.chatActiveButton));
         this.followerNumberActiveButton.addEventListener('click', () => this.setActiveButton(this.followerNumberActiveButton));
         this.sendDataToBackendButton.addEventListener('click', () => ipcRenderer.invoke("send-alert-data-to-backend", this.alertData));
+        this.customUserButton.addEventListener('click', () => this.toggleCustomActionWindow());
 
         this.addEventListener("send-alert-data-to-alert-box", (e) => {
             let data = e.detail.data;
@@ -114,6 +119,13 @@ class AlertBoxes extends HTMLElement {
                 alert("No Alert Box selected");
             };
         });
+    };
+
+    toggleCustomActionWindow() {
+        this.customActionWindowOpen = !this.customActionWindowOpen;
+        if (this.customActionWindowOpen) {
+            //IMPLEMENT OPEN CUSTOM ACTION WINDOW
+        };
     };
 };
 
